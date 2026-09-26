@@ -270,6 +270,9 @@ export interface InternalTransfer {
   destination_location_id: string;
   status: OrderStatus;
   notes?: string;
+  scheduled_date?: string;
+  completed_date?: string;
+  responsible_id?: string;
   created_by?: string;
   created_at?: string;
   updated_at?: string;
@@ -277,7 +280,12 @@ export interface InternalTransfer {
   destination_warehouse?: Warehouse;
   source_location?: Location;
   destination_location?: Location;
+  responsible?: Profile;
+  creator?: Profile;
   items?: InternalTransferItem[];
+  // Computed fields
+  total_quantity?: number;
+  total_items?: number;
 }
 
 export interface InternalTransferItem {
@@ -287,7 +295,51 @@ export interface InternalTransferItem {
   quantity: number;
   created_at?: string;
   product?: Product;
+  // Stock availability at time of query
+  available_stock?: number;
 }
+
+export interface CreateInternalTransferItemInput {
+  product_id: string;
+  quantity: number;
+}
+
+export interface CreateInternalTransferInput {
+  reference?: string;
+  source_warehouse_id: string;
+  source_location_id: string;
+  destination_warehouse_id: string;
+  destination_location_id: string;
+  status?: OrderStatus;
+  scheduled_date?: string;
+  responsible_id?: string;
+  notes?: string;
+  items: CreateInternalTransferItemInput[];
+}
+
+export interface UpdateInternalTransferInput {
+  reference?: string;
+  source_warehouse_id?: string;
+  source_location_id?: string;
+  destination_warehouse_id?: string;
+  destination_location_id?: string;
+  status?: OrderStatus;
+  scheduled_date?: string;
+  responsible_id?: string;
+  notes?: string;
+  items?: {
+    id?: string;
+    product_id: string;
+    quantity: number;
+  }[];
+}
+
+export type AdjustmentReason =
+  | 'Damaged'
+  | 'Lost'
+  | 'Found'
+  | 'Counting Error'
+  | 'Other';
 
 export interface InventoryAdjustment {
   id: string;
@@ -299,13 +351,44 @@ export interface InventoryAdjustment {
   real_quantity: number;
   difference: number;
   reason?: string;
+  notes?: string;
   status: OrderStatus;
+  completed_date?: string;
+  responsible_id?: string;
   created_by?: string;
   created_at?: string;
   updated_at?: string;
   warehouse?: Warehouse;
   location?: Location;
   product?: Product;
+  responsible?: Profile;
+  creator?: Profile;
+}
+
+export interface CreateInventoryAdjustmentInput {
+  reference?: string;
+  warehouse_id: string;
+  location_id: string;
+  product_id: string;
+  theoretical_quantity: number;
+  real_quantity: number;
+  reason?: string;
+  notes?: string;
+  responsible_id?: string;
+  status?: OrderStatus;
+}
+
+export interface UpdateInventoryAdjustmentInput {
+  reference?: string;
+  warehouse_id?: string;
+  location_id?: string;
+  product_id?: string;
+  theoretical_quantity?: number;
+  real_quantity?: number;
+  reason?: string;
+  notes?: string;
+  responsible_id?: string;
+  status?: OrderStatus;
 }
 
 export interface StockLedger {

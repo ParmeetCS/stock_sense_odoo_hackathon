@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   ArrowDownLeft,
   Plus,
-  Search,
   ArrowUpDown,
   ArrowUp,
   ArrowDown,
@@ -26,6 +25,11 @@ import { StatusBadge } from '../../../components/ui/StatusBadge';
 import { useToast } from '../../../components/ui/Toast';
 import { useAuth } from '../../../context/AuthContext';
 import {
+  GlobalFilterToolbar,
+  type ActiveFilter,
+} from '../../../components/ui/GlobalFilterToolbar';
+import { useUrlFilterParams } from '../../../hooks/useUrlFilterParams';
+import {
   fetchReceiptsList,
   validateReceipt,
   updateReceiptStatus,
@@ -36,7 +40,6 @@ import { cn } from '../../../utils/cn';
 
 export const ReceiptList: React.FC = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
   const { showToast } = useToast();
 
@@ -45,21 +48,27 @@ export const ReceiptList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'list' | 'kanban'>('list');
 
-  // Filters
-  const [search, setSearch] = useState(searchParams.get('q') || '');
-  const [status, setStatus] = useState<OrderStatus | 'all'>(
-    (searchParams.get('status') as any) || 'all'
-  );
-  const [warehouseId, setWarehouseId] = useState(searchParams.get('warehouse_id') || 'all');
-  const [startDate, setStartDate] = useState(searchParams.get('start_date') || '');
-  const [endDate, setEndDate] = useState(searchParams.get('end_date') || '');
+  // Standardized URL query parameter syncing
+  const { getParam, updateParams, resetParams } = useUrlFilterParams({
+    q: '',
+    status: 'all',
+    warehouse_id: 'all',
+    start_date: '',
+    end_date: '',
+    sortBy: 'created_at',
+    sortOrder: 'desc',
+    page: 1,
+  });
 
-  // Sorting
-  const [sortBy, setSortBy] = useState<any>(searchParams.get('sortBy') || 'created_at');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>((searchParams.get('sortOrder') as any) || 'desc');
+  const search = getParam('q', '');
+  const status = getParam('status', 'all') as OrderStatus | 'all';
+  const warehouseId = getParam('warehouse_id', 'all');
+  const startDate = getParam('start_date', '');
+  const endDate = getParam('end_date', '');
+  const sortBy = getParam('sortBy', 'created_at');
+  const sortOrder = getParam('sortOrder', 'desc') as 'asc' | 'desc';
+  const currentPage = getParam('page', 1);
 
-  // Pagination
-  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
   const [pageSize, setPageSize] = useState(10);
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
@@ -99,17 +108,6 @@ export const ReceiptList: React.FC = () => {
       setTotalRecords(res.totalCount);
       setTotalPages(res.totalPages);
       setKanbanCounts(res.kanbanCounts);
-
-      const params = new URLSearchParams();
-      if (search) params.set('q', search);
-      if (status !== 'all') params.set('status', status);
-      if (warehouseId !== 'all') params.set('warehouse_id', warehouseId);
-      if (startDate) params.set('start_date', startDate);
-      if (endDate) params.set('end_date', endDate);
-      if (sortBy !== 'created_at') params.set('sortBy', sortBy);
-      if (sortOrder !== 'desc') params.set('sortOrder', sortOrder);
-      if (currentPage > 1) params.set('page', String(currentPage));
-      setSearchParams(params, { replace: true });
     } catch (err: any) {
       showToast('Error', err.message || 'Failed to load receipts', 'error');
     } finally {
@@ -123,12 +121,10 @@ export const ReceiptList: React.FC = () => {
 
   const handleSort = (field: any) => {
     if (sortBy === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      updateParams({ sortOrder: sortOrder === 'asc' ? 'desc' : 'asc', page: 1 });
     } else {
-      setSortBy(field);
-      setSortOrder('asc');
+      updateParams({ sortBy: field, sortOrder: 'asc', page: 1 });
     }
-    setCurrentPage(1);
   };
 
   const handleCopyRef = (ref: string, e: React.MouseEvent) => {
@@ -165,15 +161,32 @@ export const ReceiptList: React.FC = () => {
     }
   };
 
-  const handleResetFilters = () => {
-    setSearch('');
-    setStatus('all');
-    setWarehouseId('all');
-    setStartDate('');
-    setEndDate('');
-    setSortBy('created_at');
-    setSortOrder('desc');
-    setCurrentPage(1);
+  // Build active filter chips
+  const activeFilters: ActiveFilter[] = [];
+  if (search) {
+    activeFilters.push({ key: 'q', label: 'Search', valueDisplay: search, rawVal: search });
+  }
+  if (status !== 'all') {
+    activeFilters.push({ key: 'status', label: 'Status', valueDisplay: status, rawVal: status });
+  }
+  if (warehouseId !== 'all') {
+    const wh = warehouses.find((w) => w.id === warehouseId);
+    activeFilters.push({
+      key: 'warehouse_id',
+      label: 'Warehouse',
+      valueDisplay: wh ? wh.code : warehouseId,
+      rawVal: warehouseId,
+    });
+  }
+  if (startDate) {
+    activeFilters.push({ key: 'start_date', label: 'From Date', valueDisplay: startDate, rawVal: startDate });
+  }
+  if (endDate) {
+    activeFilters.push({ key: 'end_date', label: 'To Date', valueDisplay: endDate, rawVal: endDate });
+  }
+
+  const handleRemoveFilter = (key: string) => {
+    updateParams({ [key]: undefined, page: 1 });
   };
 
   const kanbanColumns: { id: OrderStatus; label: string; icon: any; color: string }[] = [
@@ -246,122 +259,60 @@ export const ReceiptList: React.FC = () => {
         }
       />
 
-      {/* Filter Toolbar */}
-      <div className="bg-slate-900/90 border border-slate-800/80 rounded-xl p-4 space-y-3.5 shadow-sm backdrop-blur-sm">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-          {/* Main Search */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1);
-              }}
-              placeholder="Search reference, vendor, destination bin, notes..."
-              className="w-full h-9 pl-9 pr-3 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-            />
-          </div>
-
-          {/* Status Segmented Buttons */}
-          <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-lg border border-slate-800 text-xs overflow-x-auto">
-            {[
-              { id: 'all', label: 'All' },
-              { id: 'draft', label: `Draft (${kanbanCounts.draft})` },
-              { id: 'waiting', label: `Waiting (${kanbanCounts.waiting})` },
-              { id: 'ready', label: `Ready (${kanbanCounts.ready})` },
-              { id: 'done', label: `Done (${kanbanCounts.done})` },
-              { id: 'canceled', label: `Canceled (${kanbanCounts.canceled})` },
-            ].map((st) => (
-              <button
-                key={st.id}
-                onClick={() => {
-                  setStatus(st.id as any);
-                  setCurrentPage(1);
-                }}
-                className={cn(
-                  'px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap',
-                  status === st.id
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-900'
-                )}
-              >
-                {st.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Dropdown Filters Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-800/60">
-          {/* Warehouse Filter */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Destination Warehouse
-            </label>
-            <select
-              value={warehouseId}
-              onChange={(e) => {
-                setWarehouseId(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            >
-              <option value="all">All Warehouses</option>
-              {warehouses.map((w) => (
-                <option key={w.id} value={w.id}>
-                  {w.name} [{w.code}]
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Start Date */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              From Date
-            </label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            />
-          </div>
-
-          {/* End Date */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              To Date
-            </label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => {
-                setEndDate(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            />
-          </div>
-
-          {/* Reset Filters */}
-          <div className="flex items-end">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleResetFilters}
-              className="w-full h-8 text-xs text-slate-400 hover:text-white"
-            >
-              Reset Filters
-            </Button>
-          </div>
-        </div>
+      {/* Status Segmented Tabs */}
+      <div className="flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 text-xs overflow-x-auto">
+        {[
+          { id: 'all', label: 'All Receipts' },
+          { id: 'draft', label: `Draft (${kanbanCounts.draft})` },
+          { id: 'waiting', label: `Waiting (${kanbanCounts.waiting})` },
+          { id: 'ready', label: `Ready (${kanbanCounts.ready})` },
+          { id: 'done', label: `Done (${kanbanCounts.done})` },
+          { id: 'canceled', label: `Canceled (${kanbanCounts.canceled})` },
+        ].map((st) => (
+          <button
+            key={st.id}
+            onClick={() => updateParams({ status: st.id as any, page: 1 })}
+            className={cn(
+              'px-3.5 py-1.5 rounded-lg font-medium transition-all whitespace-nowrap',
+              status === st.id
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            )}
+          >
+            {st.label}
+          </button>
+        ))}
       </div>
+
+      {/* Global Filter Toolbar */}
+      <GlobalFilterToolbar
+        search={search}
+        onSearchChange={(val) => updateParams({ q: val, page: 1 })}
+        searchPlaceholder="Search reference, vendor, contact, destination bin..."
+        warehouses={warehouses}
+        selectedWarehouse={warehouseId}
+        onWarehouseChange={(val) => updateParams({ warehouse_id: val, page: 1 })}
+        warehouseLabel="Destination WH: All"
+        startDate={startDate}
+        onStartDateChange={(val) => updateParams({ start_date: val, page: 1 })}
+        endDate={endDate}
+        onEndDateChange={(val) => updateParams({ end_date: val, page: 1 })}
+        sortOptions={[
+          { value: 'created_at', label: 'Creation Date' },
+          { value: 'reference', label: 'Reference' },
+          { value: 'supplier', label: 'Vendor' },
+          { value: 'scheduled_date', label: 'Scheduled Date' },
+          { value: 'quantity', label: 'Expected Quantity' },
+          { value: 'status', label: 'Status' },
+        ]}
+        sortBy={sortBy}
+        onSortByChange={(val) => updateParams({ sortBy: val, page: 1 })}
+        sortOrder={sortOrder}
+        onToggleSortOrder={() => updateParams({ sortOrder: sortOrder === 'asc' ? 'desc' : 'asc', page: 1 })}
+        activeFilters={activeFilters}
+        onRemoveFilter={handleRemoveFilter}
+        onClearAll={resetParams}
+      />
 
       {/* KANBAN VIEW */}
       {viewMode === 'kanban' ? (
@@ -689,7 +640,7 @@ export const ReceiptList: React.FC = () => {
                   value={pageSize}
                   onChange={(e) => {
                     setPageSize(Number(e.target.value));
-                    setCurrentPage(1);
+                    updateParams({ page: 1 });
                   }}
                   className="bg-slate-950 border border-slate-800 rounded px-1.5 py-0.5 text-xs text-white"
                 >
@@ -705,7 +656,7 @@ export const ReceiptList: React.FC = () => {
                 variant="outline"
                 size="sm"
                 disabled={currentPage <= 1 || loading}
-                onClick={() => setCurrentPage(currentPage - 1)}
+                onClick={() => updateParams({ page: currentPage - 1 })}
                 className="h-8 px-2.5"
               >
                 Previous
@@ -717,7 +668,7 @@ export const ReceiptList: React.FC = () => {
                 variant="outline"
                 size="sm"
                 disabled={currentPage >= totalPages || loading}
-                onClick={() => setCurrentPage(currentPage + 1)}
+                onClick={() => updateParams({ page: currentPage + 1 })}
                 className="h-8 px-2.5"
               >
                 Next

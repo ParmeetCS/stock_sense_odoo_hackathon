@@ -22,6 +22,13 @@ import { StockList } from '../pages/stock/StockList';
 import { ReceiptList } from '../pages/operations/receipts/ReceiptList';
 import { ReceiptCreate } from '../pages/operations/receipts/ReceiptCreate';
 import { ReceiptDetail } from '../pages/operations/receipts/ReceiptDetail';
+import { TransferList } from '../pages/operations/transfers/TransferList';
+import { TransferCreate } from '../pages/operations/transfers/TransferCreate';
+import { TransferDetail } from '../pages/operations/transfers/TransferDetail';
+import { AdjustmentList } from '../pages/operations/adjustments/AdjustmentList';
+import { AdjustmentCreate } from '../pages/operations/adjustments/AdjustmentCreate';
+import { AdjustmentDetail } from '../pages/operations/adjustments/AdjustmentDetail';
+import { MoveHistoryList } from '../pages/audit/MoveHistoryList';
 import { PlaceholderModule } from '../components/PlaceholderModule';
 
 const router = createBrowserRouter([
@@ -95,33 +102,33 @@ const router = createBrowserRouter([
               /* Transfers */
               {
                 path: 'operations/transfers',
-                element: <PlaceholderModule title="Internal Transfers List" moduleName="Internal Transfers" category="Operations" createPath="/operations/transfers/new" />,
+                element: <TransferList />,
               },
               {
                 path: 'operations/transfers/new',
-                element: <PlaceholderModule title="Create Internal Transfer" moduleName="New Transfer" category="Operations" />,
+                element: <TransferCreate />,
               },
               {
                 path: 'operations/transfers/:id',
-                element: <PlaceholderModule title="Transfer Detail: WH/INT/0001" moduleName="Transfer Detail" category="Operations" />,
+                element: <TransferDetail />,
               },
               /* Adjustments */
               {
                 path: 'operations/adjustments',
-                element: <PlaceholderModule title="Inventory Adjustments List" moduleName="Adjustments" category="Operations" createPath="/operations/adjustments/new" />,
+                element: <AdjustmentList />,
               },
               {
                 path: 'operations/adjustments/new',
-                element: <PlaceholderModule title="Create Inventory Adjustment" moduleName="New Adjustment" category="Operations" />,
+                element: <AdjustmentCreate />,
               },
               {
                 path: 'operations/adjustments/:id',
-                element: <PlaceholderModule title="Adjustment Detail: ADJ/0001" moduleName="Adjustment Detail" category="Operations" />,
+                element: <AdjustmentDetail />,
               },
               /* Move History */
               {
                 path: 'move-history',
-                element: <PlaceholderModule title="Move History & Audit Trail" moduleName="Move History" category="Audit" />,
+                element: <MoveHistoryList />,
               },
               /* Settings - Warehouses */
               {

@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Package,
   Plus,
-  Search,
   ArrowUpDown,
   ArrowUp,
   ArrowDown,
@@ -33,6 +32,7 @@ import {
   createCategory,
 } from '../../services/productService';
 import type { Product, Category, Warehouse, Location } from '../../types';
+import { GlobalFilterToolbar, type ActiveFilter } from '../../components/ui/GlobalFilterToolbar';
 import { cn } from '../../utils/cn';
 
 export const ProductList: React.FC = () => {
@@ -180,6 +180,52 @@ export const ProductList: React.FC = () => {
       setSortBy(field);
       setSortOrder('asc');
     }
+    setCurrentPage(1);
+  };
+
+  // Sync state to URL search parameters
+  useEffect(() => {
+    const params: Record<string, string> = {};
+    if (search) params.q = search;
+    if (skuSearch) params.sku = skuSearch;
+    if (selectedCategory !== 'all') params.category = selectedCategory;
+    if (selectedWarehouse !== 'all') params.warehouse = selectedWarehouse;
+    if (selectedLocation !== 'all') params.location = selectedLocation;
+    if (stockStatus !== 'all') params.status = stockStatus;
+    if (sortBy !== 'name') params.sortBy = sortBy;
+    if (sortOrder !== 'asc') params.sortOrder = sortOrder;
+    if (currentPage > 1) params.page = String(currentPage);
+
+    setSearchParams(params, { replace: true });
+  }, [search, skuSearch, selectedCategory, selectedWarehouse, selectedLocation, stockStatus, sortBy, sortOrder, currentPage, setSearchParams]);
+
+  // Compute active filter chips
+  const activeChips: ActiveFilter[] = [];
+  if (search) activeChips.push({ key: 'q', label: 'Search', valueDisplay: search, rawVal: search });
+  if (skuSearch) activeChips.push({ key: 'sku', label: 'SKU', valueDisplay: skuSearch, rawVal: skuSearch });
+  if (selectedCategory !== 'all') {
+    const c = categories.find((cat) => cat.id === selectedCategory);
+    activeChips.push({ key: 'category', label: 'Category', valueDisplay: c?.name || selectedCategory, rawVal: selectedCategory });
+  }
+  if (selectedWarehouse !== 'all') {
+    const w = warehouses.find((wh) => wh.id === selectedWarehouse);
+    activeChips.push({ key: 'warehouse', label: 'Warehouse', valueDisplay: w?.code || selectedWarehouse, rawVal: selectedWarehouse });
+  }
+  if (selectedLocation !== 'all') {
+    const l = locations.find((loc) => loc.id === selectedLocation);
+    activeChips.push({ key: 'location', label: 'Location', valueDisplay: l?.code || selectedLocation, rawVal: selectedLocation });
+  }
+  if (stockStatus !== 'all') {
+    activeChips.push({ key: 'status', label: 'Status', valueDisplay: stockStatus, rawVal: stockStatus });
+  }
+
+  const handleRemoveFilter = (key: string) => {
+    if (key === 'q') setSearch('');
+    if (key === 'sku') setSkuSearch('');
+    if (key === 'category') setSelectedCategory('all');
+    if (key === 'warehouse') setSelectedWarehouse('all');
+    if (key === 'location') setSelectedLocation('all');
+    if (key === 'status') setStockStatus('all');
     setCurrentPage(1);
   };
 
@@ -379,153 +425,74 @@ export const ProductList: React.FC = () => {
         </div>
       </div>
 
-      {/* Advanced Filter Toolbar */}
-      <div className="bg-slate-900/90 border border-slate-800/80 rounded-xl p-4 space-y-3.5 shadow-sm backdrop-blur-sm">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-          {/* Main Search & Dedicated SKU Search */}
-          <div className="flex flex-1 flex-col sm:flex-row items-center gap-2.5">
-            <div className="relative flex-1 w-full">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setCurrentPage(1);
-                }}
-                placeholder="Search products, description, category..."
-                className="w-full h-9 pl-9 pr-3 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-              />
-            </div>
-
-            <div className="relative w-full sm:w-48">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono font-bold text-blue-400 bg-blue-500/10 px-1 py-0.5 rounded border border-blue-500/20">
-                SKU
-              </span>
-              <input
-                type="text"
-                value={skuSearch}
-                onChange={(e) => {
-                  setSkuSearch(e.target.value);
-                  setCurrentPage(1);
-                }}
-                placeholder="Exact SKU..."
-                className="w-full h-9 pl-12 pr-3 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-white font-mono placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-              />
-            </div>
-          </div>
-
-          {/* Status Segmented Buttons */}
-          <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-lg border border-slate-800 text-xs overflow-x-auto">
-            {[
-              { id: 'all', label: 'All' },
-              { id: 'in_stock', label: 'In Stock' },
-              { id: 'low_stock', label: 'Low Stock' },
-              { id: 'out_of_stock', label: 'Out of Stock' },
-              { id: 'active', label: 'Active' },
-              { id: 'inactive', label: 'Inactive' },
-            ].map((st) => (
-              <button
-                key={st.id}
-                onClick={() => {
-                  setStockStatus(st.id);
-                  setCurrentPage(1);
-                }}
-                className={cn(
-                  'px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap',
-                  stockStatus === st.id
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-900'
-                )}
-              >
-                {st.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Dropdown Filters Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-800/60">
-          {/* Category Filter */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Category
-            </label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => {
-                setSelectedCategory(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            >
-              <option value="all">All Categories</option>
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name} {c.code ? `(${c.code})` : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Warehouse Filter */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Warehouse
-            </label>
-            <select
-              value={selectedWarehouse}
-              onChange={(e) => {
-                setSelectedWarehouse(e.target.value);
-                setSelectedLocation('all');
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            >
-              <option value="all">All Warehouses</option>
-              {warehouses.map((w) => (
-                <option key={w.id} value={w.id}>
-                  {w.name} [{w.code}]
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Location Filter */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Location / Bin
-            </label>
-            <select
-              value={selectedLocation}
-              onChange={(e) => {
-                setSelectedLocation(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-8 px-2.5 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-            >
-              <option value="all">All Locations</option>
-              {availableLocations.map((l) => (
-                <option key={l.id} value={l.id}>
-                  {l.name} [{l.code}]
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Reset Filters Action */}
-          <div className="flex items-end">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleResetFilters}
-              className="w-full h-8 text-xs text-slate-400 hover:text-white"
-            >
-              Reset All Filters
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* Global Filter Toolbar */}
+      <GlobalFilterToolbar
+        search={search}
+        onSearchChange={(val) => {
+          setSearch(val);
+          setCurrentPage(1);
+        }}
+        searchPlaceholder="Search products by name, description, category..."
+        secondarySearch={{
+          value: skuSearch,
+          onChange: (val) => {
+            setSkuSearch(val);
+            setCurrentPage(1);
+          },
+          placeholder: "Search SKU...",
+        }}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={(val) => {
+          setSelectedCategory(val);
+          setCurrentPage(1);
+        }}
+        warehouses={warehouses}
+        selectedWarehouse={selectedWarehouse}
+        onWarehouseChange={(val) => {
+          setSelectedWarehouse(val);
+          setSelectedLocation('all');
+          setCurrentPage(1);
+        }}
+        locations={availableLocations}
+        selectedLocation={selectedLocation}
+        onLocationChange={(val) => {
+          setSelectedLocation(val);
+          setCurrentPage(1);
+        }}
+        statuses={[
+          { value: 'in_stock', label: 'In Stock' },
+          { value: 'low_stock', label: 'Low Stock' },
+          { value: 'out_of_stock', label: 'Out of Stock' },
+          { value: 'active', label: 'Active' },
+          { value: 'inactive', label: 'Inactive' },
+        ]}
+        selectedStatus={stockStatus}
+        onStatusChange={(val) => {
+          setStockStatus(val);
+          setCurrentPage(1);
+        }}
+        sortOptions={[
+          { value: 'name', label: 'Name' },
+          { value: 'sku', label: 'SKU' },
+          { value: 'category', label: 'Category' },
+          { value: 'on_hand', label: 'On Hand Stock' },
+          { value: 'reorder_level', label: 'Reorder Point' },
+        ]}
+        sortBy={sortBy}
+        onSortByChange={(val) => {
+          setSortBy(val);
+          setCurrentPage(1);
+        }}
+        sortOrder={sortOrder}
+        onToggleSortOrder={() => {
+          setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+          setCurrentPage(1);
+        }}
+        activeFilters={activeChips}
+        onRemoveFilter={handleRemoveFilter}
+        onClearAll={handleResetFilters}
+      />
 
       {/* Main Products Data Table */}
       <div className="w-full rounded-xl border border-slate-800 bg-slate-900/70 shadow-lg overflow-hidden backdrop-blur-sm">
