@@ -12,6 +12,9 @@
 
 StockSense is a high-performance, real-time Enterprise Warehouse Management System (WMS) built with React 19, TypeScript, Vite, Tailwind CSS v4, and Supabase. It implements an atomic, double-entry inventory ledger engine designed according to standard logistics and supply chain principles.
 
+> [!IMPORTANT]
+> **📧 New User Email Confirmation**: Upon signing up for a new account, Supabase dispatches a verification link to your email mailbox. **Please check your email and click the confirmation link** to verify your account before logging in to the dashboard.
+
 ---
 
 ## 1. Architecture & Tech Stack
@@ -159,7 +162,7 @@ sequenceDiagram
 | **Sign In (Password)** | `supabase.auth.signInWithPassword()` | `email`, `password` | `Session`, `User` | Public | Validates credentials; returns auth token. |
 | **SMS OTP Login** | `send_otp` RPC / API | `phone` (E.164) | `{ success, message }` | Public | Generates & dispatches 6-digit OTP code via Textlocal SMS gateway. |
 | **Verify OTP** | `supabase.auth.verifyOtp()` | `phone`/`email`, `token` | `Session`, `User` | Public | Validates 6-digit token before expiry. |
-| **Sign Up** | `supabase.auth.signUp()` | `email`, `password`, `full_name`, `role` | `User`, Profile Record | Public | Automatically creates profile record with assigned role (`inventory_user`, `manager`, `admin`). |
+| **Sign Up** | `supabase.auth.signUp()` | `email`, `password`, `full_name`, `role` | `User`, Profile Record | Public | Creates profile record with role (`inventory_user`, `manager`, `admin`). Sends verification email to mailbox; user must click confirmation link before signing in. |
 | **Sign Out** | `supabase.auth.signOut()` | None | Void | Authenticated | Clears current user session and local tokens. |
 
 ---

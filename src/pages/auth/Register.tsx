@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Card, CardHeader, CardTitle } from '../../components/ui/Card';
-import { User, Mail, Lock, AlertCircle, ArrowRight, ShieldCheck, UserCheck } from 'lucide-react';
+import { User, Mail, Lock, AlertCircle, ArrowRight, ShieldCheck, UserCheck, MailCheck } from 'lucide-react';
 import type { UserRole } from '../../types';
 
 export const Register: React.FC = () => {
-  const navigate = useNavigate();
   const { signUp } = useAuth();
   
   const [fullName, setFullName] = useState('');
@@ -17,11 +16,13 @@ export const Register: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   
   const [error, setError] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setSuccessMsg(null);
 
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
@@ -41,7 +42,10 @@ export const Register: React.FC = () => {
       setError(signUpError.message || 'Registration failed. Please check details.');
       setLoading(false);
     } else {
-      navigate('/dashboard');
+      setLoading(false);
+      setSuccessMsg(
+        `Account created successfully! Please check your mailbox (${email}) to confirm your email address before signing in.`
+      );
     }
   };
 
@@ -71,6 +75,21 @@ export const Register: React.FC = () => {
             <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 flex items-start gap-2.5 text-red-400 text-xs">
               <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>{error}</span>
+            </div>
+          )}
+
+          {successMsg && (
+            <div className="mb-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-start gap-3 text-emerald-300 text-xs leading-relaxed">
+              <MailCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-2">
+                <p className="font-semibold text-emerald-200">Confirmation Link Sent to Mailbox</p>
+                <p>{successMsg}</p>
+                <div className="pt-1">
+                  <Link to="/login" className="inline-flex items-center gap-1 text-emerald-400 font-bold hover:underline">
+                    Proceed to Sign In <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
 
