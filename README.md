@@ -4,13 +4,44 @@ StockSense is a high-performance, real-time Enterprise Warehouse Management Syst
 
 ---
 
-## 1. System Architecture & Tech Stack
+## 1. Architecture & Tech Stack
 
 - **Frontend Core:** React 19, TypeScript 6.0, Vite 8
 - **Styling & UI:** Tailwind CSS v4, Lucide React icons, Vanilla CSS utility tokens
-- **Data & Backend:** Supabase (PostgreSQL 15+), Realtime subscriptions, Auth with RLS, Atomic Stored Procedures (PL/pgSQL RPCs)
-- **State & Router:** React Router v7, Custom URL Sync Hooks, Context API for Auth & Toast Notifications
-- **Testing & Quality:** Vitest 5.0, Oxlint, TypeScript strict mode
+- **Data & Backend:** Supabase (PostgreSQL 15+), Realtime subscriptions, Row Level Security (RLS), Atomic Stored Procedures (PL/pgSQL RPCs)
+- **State & Router:** React Router v7 with dynamic route lazy-loading, Custom URL Sync Hooks, Context API for Auth & Toast Notifications
+- **Testing & Quality:** Vitest 5.0, Oxlint static analysis, TypeScript strict mode
+
+```mermaid
+graph TD
+    Client["React 19 Frontend App<br/>(TypeScript + Vite)"]
+    Router["React Router v7<br/>(Lazy Loaded Routes)"]
+    AuthContext["Auth Context & Session Engine"]
+    SupabaseClient["Supabase JS Client"]
+
+    subgraph Supabase BaaS Infrastructure
+        Auth["Supabase Auth Engine<br/>(JWT + GoTrue)"]
+        RLS["Row Level Security (RLS) Gatekeeper"]
+        
+        subgraph PostgreSQL Database Engine
+            Tables[("Data Tables<br/>(products, warehouses, stock)")]
+            Ledger[("stock_ledger Table<br/>(Immutable Audit Trail)")]
+            RPCs["Atomic PL/pgSQL RPCs<br/>(validate_receipt_atomic, etc.)"]
+            Views["SQL Views & KPI RPCs"]
+        end
+    end
+
+    Client --> Router
+    Client --> AuthContext
+    AuthContext --> Auth
+    Client --> SupabaseClient
+    SupabaseClient --> RLS
+    RLS --> Tables
+    RLS --> Views
+    SupabaseClient -->|Atomic Transactions| RPCs
+    RPCs -->|Atomic Updates| Tables
+    RPCs -->|Audit Trail Logs| Ledger
+```
 
 ---
 
@@ -18,58 +49,100 @@ StockSense is a high-performance, real-time Enterprise Warehouse Management Syst
 
 To run StockSense locally or deploy to production, create a `.env` file in the root directory:
 
-```bash
-# Supabase Backend Configuration
+```env
+# Supabase Backend Configuration (Vite)
 VITE_SUPABASE_URL=https://your-supabase-project-id.supabase.co
 VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 
-# Optional Textlocal SMS Gateway Config
-VITE_TEXTLOCAL_API_KEY=your-textlocal-api-key
-VITE_TEXTLOCAL_SENDER_ID=STKSNS
+# Optional Fallbacks
+NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
 ```
 
-> **Note:** Never commit production API keys or service role keys to version control. The client application uses the anonymous public key with Row Level Security (RLS) policies enforcing column-level & row-level authorization.
+> [!IMPORTANT]
+> Never commit production API keys or service role keys to version control. The client application uses the anonymous public key with Row Level Security (RLS) policies enforcing column-level & row-level authorization.
 
 ---
 
-## 3. Supabase Data Architecture & Database Schema
+## 3. Database Schema & Entity Relationship Diagram (ERD)
 
-### Database Relationships & ERD Overview
-```
-+----------------+       +-------------------+       +-------------------+
-|     users      |----<  |     profiles      |       |    categories     |
-+----------------+       +-------------------+       +-------------------+
-  (Supabase Auth)                 |                            |
-                                  v                            v
-                         +-------------------+       +-------------------+
-                         |   warehouses      |----<  |     products      |
-                         +-------------------+       +-------------------+
-                                  |                            |
-                                  v                            v
-                         +-------------------+       +-------------------+
-                         |     locations     |----<  |       stock       |
-                         +-------------------+       +-------------------+
-                                  |                            |
-                                  +------------+---------------+
-                                               |
-                                               v
-                                     +-------------------+
-                                     |   stock_ledger    | (Audit Moves)
-                                     +-------------------+
-                                               ^
-                                               |
-        +------------------+-------------------+------------------+
-        |                  |                                      |
-+---------------+  +---------------+                      +---------------+
-|   receipts    |  |   transfers   |                      |  adjustments  |
-+---------------+  +---------------+                      +---------------+
+### Database ERD Diagram
+
+```mermaid
+erDiagram
+    users ||--o| profiles : "has profile"
+    categories ||--o{ products : "contains"
+    products ||--o{ stock : "tracked in"
+    warehouses ||--o{ locations : "houses"
+    locations ||--o{ stock : "stores"
+    products ||--o{ receipt_items : "received in"
+    receipts ||--o{ receipt_items : "contains"
+    suppliers ||--o{ receipts : "supplies"
+    warehouses ||--o{ receipts : "destined for"
+    products ||--o{ delivery_items : "delivered in"
+    deliveries ||--o{ delivery_items : "contains"
+    customers ||--o{ deliveries : "receives"
+    warehouses ||--o{ deliveries : "dispatched from"
+    transfers ||--o{ transfer_items : "contains"
+    products ||--o{ transfer_items : "transferred in"
+    products ||--o{ adjustments : "adjusted in"
+    locations ||--o{ adjustments : "adjusted at"
+    stock ||--o{ stock_ledger : "generates ledger"
 ```
 
 ---
 
-## 4. Supabase API & Data Operations Specification
+## 4. Inventory Transaction Workflows
 
-### 4.1. Authentication & User Roles
+### Inventory Document Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Draft: Order Created
+    Draft --> Waiting: Availability Check / Pending Vendor
+    Waiting --> Ready: Items Picked / Reserved
+    Ready --> Done: Validate Atomic RPC Executed
+    Draft --> Canceled: User Cancels
+    Waiting --> Canceled: User Cancels
+    Ready --> Canceled: User Cancels
+    Done --> [*]: Stock & Ledger Updated (Immutable)
+    Canceled --> [*]
+```
+
+### Atomic Execution Sequence (e.g. Inbound Receipt Validation)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Manager as Warehouse Manager
+    participant App as React Frontend
+    participant RPC as validate_receipt_atomic (PL/pgSQL)
+    participant Tables as PostgreSQL Tables
+    participant Ledger as stock_ledger
+
+    Manager->>App: Click "Validate Receipt"
+    App->>RPC: Call RPC (p_receipt_id, p_user_id)
+    Note over RPC: Begin Atomic Subtransaction
+    RPC->>Tables: SELECT status FROM receipts WHERE id = p_receipt_id FOR UPDATE
+    alt Receipt already completed (status == 'done')
+        RPC-->>App: Exception: "Receipt already validated"
+    else Status is Draft / Ready
+        RPC->>Tables: UPDATE receipts SET status = 'done', completed_at = NOW()
+        loop For Each Item in receipt_items
+            RPC->>Tables: UPDATE stock SET on_hand = on_hand + qty WHERE location_id & product_id
+            RPC->>Ledger: INSERT INTO stock_ledger (direction='IN', product_id, qty, ref)
+        end
+        Note over RPC: Commit Transaction
+        RPC-->>App: Return { success: true, message: "Receipt Validated" }
+    end
+    App-->>Manager: Show Success Toast & Refresh UI
+```
+
+---
+
+## 5. Supabase API & Data Operations Specification
+
+### 5.1. Authentication & User Roles
 
 | Operation | Supabase API / RPC / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -81,7 +154,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.2. Products & Catalog Management
+### 5.2. Products & Catalog Management
 
 | Operation | Supabase API / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -92,7 +165,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.3. Warehouses & Bins (Locations)
+### 5.3. Warehouses & Bins (Locations)
 
 | Operation | Supabase API / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -103,7 +176,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.4. Stock Balances & Real-Time Quantities
+### 5.4. Stock Balances & Real-Time Quantities
 
 | Operation | Supabase API / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -112,7 +185,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.5. Inbound Receipts (`WH/IN/xxxx`)
+### 5.5. Inbound Receipts (`WH/IN/xxxx`)
 
 | Operation | Supabase API / RPC / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -122,7 +195,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.6. Outbound Deliveries (`WH/OUT/xxxx`)
+### 5.6. Outbound Deliveries (`WH/OUT/xxxx`)
 
 | Operation | Supabase API / RPC / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -131,7 +204,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.7. Internal Transfers (`WH/INT/xxxx`)
+### 5.7. Internal Transfers (`WH/INT/xxxx`)
 
 | Operation | Supabase API / RPC / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -140,7 +213,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.8. Inventory Adjustments (`ADJ/xxxx`)
+### 5.8. Inventory Adjustments (`ADJ/xxxx`)
 
 | Operation | Supabase API / RPC / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -149,7 +222,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.9. Move History & Audit Trail
+### 5.9. Move History & Audit Trail
 
 | Operation | Supabase API / Table | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -157,7 +230,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-### 4.10. Executive Dashboard Metrics
+### 5.10. Executive Dashboard Metrics
 
 | Operation | Supabase API / RPC | Inputs | Outputs | Auth & RLS | Business Rules & Errors |
 |---|---|---|---|---|---|
@@ -165,7 +238,7 @@ VITE_TEXTLOCAL_SENDER_ID=STKSNS
 
 ---
 
-## 5. Security & Authorization Model
+## 6. Security & Authorization Model
 
 ### Row Level Security (RLS) Policies
 All database tables have RLS enabled (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`).
@@ -175,7 +248,7 @@ All database tables have RLS enabled (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY
 
 ---
 
-## 6. Development & Build Commands
+## 7. Development & Verification Commands
 
 ```bash
 # Install dependencies
