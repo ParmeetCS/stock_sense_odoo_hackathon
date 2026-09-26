@@ -37,7 +37,7 @@ import {
   ChevronRight,
   Warehouse as WarehouseIcon,
   Calendar,
-  FolderGrid,
+  Folder,
   RotateCcw,
 } from 'lucide-react';
 import { cn } from '../utils/cn';
@@ -193,7 +193,7 @@ export const Dashboard: React.FC = () => {
 
           {/* Category Filter */}
           <div className="flex items-center gap-1.5 bg-slate-950 px-2.5 py-1.5 rounded-lg border border-slate-800 text-xs">
-            <FolderGrid className="w-3.5 h-3.5 text-slate-400" />
+            <Folder className="w-3.5 h-3.5 text-slate-400" />
             <select
               value={filters.categoryId}
               onChange={(e) => setFilters((prev) => ({ ...prev, categoryId: e.target.value }))}
