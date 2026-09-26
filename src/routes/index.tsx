@@ -1,35 +1,45 @@
+import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { RootLayout } from '../layouts/RootLayout';
 import { AppShell } from '../layouts/AppShell';
 import { ProtectedRoute } from './ProtectedRoute';
-import { Login } from '../pages/auth/Login';
-import { Register } from '../pages/auth/Register';
-import { ForgotPassword } from '../pages/auth/ForgotPassword';
-import { OtpVerification } from '../pages/auth/OtpVerification';
-import { ResetPassword } from '../pages/auth/ResetPassword';
-import { ProfilePage } from '../pages/ProfilePage';
-import { Dashboard } from '../pages/Dashboard';
-import { ProductList } from '../pages/products/ProductList';
-import { ProductCreate } from '../pages/products/ProductCreate';
-import { ProductDetail } from '../pages/products/ProductDetail';
-import { WarehouseList } from '../pages/warehouses/WarehouseList';
-import { WarehouseCreate } from '../pages/warehouses/WarehouseCreate';
-import { WarehouseDetail } from '../pages/warehouses/WarehouseDetail';
-import { LocationList } from '../pages/locations/LocationList';
-import { LocationCreate } from '../pages/locations/LocationCreate';
-import { LocationDetail } from '../pages/locations/LocationDetail';
-import { StockList } from '../pages/stock/StockList';
-import { ReceiptList } from '../pages/operations/receipts/ReceiptList';
-import { ReceiptCreate } from '../pages/operations/receipts/ReceiptCreate';
-import { ReceiptDetail } from '../pages/operations/receipts/ReceiptDetail';
-import { TransferList } from '../pages/operations/transfers/TransferList';
-import { TransferCreate } from '../pages/operations/transfers/TransferCreate';
-import { TransferDetail } from '../pages/operations/transfers/TransferDetail';
-import { AdjustmentList } from '../pages/operations/adjustments/AdjustmentList';
-import { AdjustmentCreate } from '../pages/operations/adjustments/AdjustmentCreate';
-import { AdjustmentDetail } from '../pages/operations/adjustments/AdjustmentDetail';
-import { MoveHistoryList } from '../pages/audit/MoveHistoryList';
+import { LoadingState } from '../components/ui/EmptyState';
 import { PlaceholderModule } from '../components/PlaceholderModule';
+
+// Dynamic lazy-loaded route components for performance & code splitting
+const Login = lazy(() => import('../pages/auth/Login').then((m) => ({ default: m.Login })));
+const Register = lazy(() => import('../pages/auth/Register').then((m) => ({ default: m.Register })));
+const ForgotPassword = lazy(() => import('../pages/auth/ForgotPassword').then((m) => ({ default: m.ForgotPassword })));
+const OtpVerification = lazy(() => import('../pages/auth/OtpVerification').then((m) => ({ default: m.OtpVerification })));
+const ResetPassword = lazy(() => import('../pages/auth/ResetPassword').then((m) => ({ default: m.ResetPassword })));
+const ProfilePage = lazy(() => import('../pages/ProfilePage').then((m) => ({ default: m.ProfilePage })));
+const Dashboard = lazy(() => import('../pages/Dashboard').then((m) => ({ default: m.Dashboard })));
+const ProductList = lazy(() => import('../pages/products/ProductList').then((m) => ({ default: m.ProductList })));
+const ProductCreate = lazy(() => import('../pages/products/ProductCreate').then((m) => ({ default: m.ProductCreate })));
+const ProductDetail = lazy(() => import('../pages/products/ProductDetail').then((m) => ({ default: m.ProductDetail })));
+const WarehouseList = lazy(() => import('../pages/warehouses/WarehouseList').then((m) => ({ default: m.WarehouseList })));
+const WarehouseCreate = lazy(() => import('../pages/warehouses/WarehouseCreate').then((m) => ({ default: m.WarehouseCreate })));
+const WarehouseDetail = lazy(() => import('../pages/warehouses/WarehouseDetail').then((m) => ({ default: m.WarehouseDetail })));
+const LocationList = lazy(() => import('../pages/locations/LocationList').then((m) => ({ default: m.LocationList })));
+const LocationCreate = lazy(() => import('../pages/locations/LocationCreate').then((m) => ({ default: m.LocationCreate })));
+const LocationDetail = lazy(() => import('../pages/locations/LocationDetail').then((m) => ({ default: m.LocationDetail })));
+const StockList = lazy(() => import('../pages/stock/StockList').then((m) => ({ default: m.StockList })));
+const ReceiptList = lazy(() => import('../pages/operations/receipts/ReceiptList').then((m) => ({ default: m.ReceiptList })));
+const ReceiptCreate = lazy(() => import('../pages/operations/receipts/ReceiptCreate').then((m) => ({ default: m.ReceiptCreate })));
+const ReceiptDetail = lazy(() => import('../pages/operations/receipts/ReceiptDetail').then((m) => ({ default: m.ReceiptDetail })));
+const TransferList = lazy(() => import('../pages/operations/transfers/TransferList').then((m) => ({ default: m.TransferList })));
+const TransferCreate = lazy(() => import('../pages/operations/transfers/TransferCreate').then((m) => ({ default: m.TransferCreate })));
+const TransferDetail = lazy(() => import('../pages/operations/transfers/TransferDetail').then((m) => ({ default: m.TransferDetail })));
+const AdjustmentList = lazy(() => import('../pages/operations/adjustments/AdjustmentList').then((m) => ({ default: m.AdjustmentList })));
+const AdjustmentCreate = lazy(() => import('../pages/operations/adjustments/AdjustmentCreate').then((m) => ({ default: m.AdjustmentCreate })));
+const AdjustmentDetail = lazy(() => import('../pages/operations/adjustments/AdjustmentDetail').then((m) => ({ default: m.AdjustmentDetail })));
+const MoveHistoryList = lazy(() => import('../pages/audit/MoveHistoryList').then((m) => ({ default: m.MoveHistoryList })));
+
+const SuspenseWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <Suspense fallback={<LoadingState message="Loading module workspace..." />}>
+    {children}
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -37,11 +47,11 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       /* Public Auth Routes */
-      { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> },
-      { path: 'forgot-password', element: <ForgotPassword /> },
-      { path: 'verify-otp', element: <OtpVerification /> },
-      { path: 'reset-password', element: <ResetPassword /> },
+      { path: 'login', element: <SuspenseWrapper><Login /></SuspenseWrapper> },
+      { path: 'register', element: <SuspenseWrapper><Register /></SuspenseWrapper> },
+      { path: 'forgot-password', element: <SuspenseWrapper><ForgotPassword /></SuspenseWrapper> },
+      { path: 'verify-otp', element: <SuspenseWrapper><OtpVerification /></SuspenseWrapper> },
+      { path: 'reset-password', element: <SuspenseWrapper><ResetPassword /></SuspenseWrapper> },
 
       /* Protected Application Shell Routes */
       {
@@ -53,38 +63,38 @@ const router = createBrowserRouter([
               { index: true, element: <Navigate to="/dashboard" replace /> },
               {
                 path: 'dashboard',
-                element: <Dashboard />,
+                element: <SuspenseWrapper><Dashboard /></SuspenseWrapper>,
               },
               /* Products */
               {
                 path: 'products',
-                element: <ProductList />,
+                element: <SuspenseWrapper><ProductList /></SuspenseWrapper>,
               },
               {
                 path: 'products/new',
-                element: <ProductCreate />,
+                element: <SuspenseWrapper><ProductCreate /></SuspenseWrapper>,
               },
               {
                 path: 'products/:id',
-                element: <ProductDetail />,
+                element: <SuspenseWrapper><ProductDetail /></SuspenseWrapper>,
               },
               /* Stock */
               {
                 path: 'stock',
-                element: <StockList />,
+                element: <SuspenseWrapper><StockList /></SuspenseWrapper>,
               },
               /* Receipts */
               {
                 path: 'operations/receipts',
-                element: <ReceiptList />,
+                element: <SuspenseWrapper><ReceiptList /></SuspenseWrapper>,
               },
               {
                 path: 'operations/receipts/new',
-                element: <ReceiptCreate />,
+                element: <SuspenseWrapper><ReceiptCreate /></SuspenseWrapper>,
               },
               {
                 path: 'operations/receipts/:id',
-                element: <ReceiptDetail />,
+                element: <SuspenseWrapper><ReceiptDetail /></SuspenseWrapper>,
               },
               /* Deliveries */
               {
@@ -102,64 +112,64 @@ const router = createBrowserRouter([
               /* Transfers */
               {
                 path: 'operations/transfers',
-                element: <TransferList />,
+                element: <SuspenseWrapper><TransferList /></SuspenseWrapper>,
               },
               {
                 path: 'operations/transfers/new',
-                element: <TransferCreate />,
+                element: <SuspenseWrapper><TransferCreate /></SuspenseWrapper>,
               },
               {
                 path: 'operations/transfers/:id',
-                element: <TransferDetail />,
+                element: <SuspenseWrapper><TransferDetail /></SuspenseWrapper>,
               },
               /* Adjustments */
               {
                 path: 'operations/adjustments',
-                element: <AdjustmentList />,
+                element: <SuspenseWrapper><AdjustmentList /></SuspenseWrapper>,
               },
               {
                 path: 'operations/adjustments/new',
-                element: <AdjustmentCreate />,
+                element: <SuspenseWrapper><AdjustmentCreate /></SuspenseWrapper>,
               },
               {
                 path: 'operations/adjustments/:id',
-                element: <AdjustmentDetail />,
+                element: <SuspenseWrapper><AdjustmentDetail /></SuspenseWrapper>,
               },
               /* Move History */
               {
                 path: 'move-history',
-                element: <MoveHistoryList />,
+                element: <SuspenseWrapper><MoveHistoryList /></SuspenseWrapper>,
               },
               /* Settings - Warehouses */
               {
                 path: 'settings/warehouses',
-                element: <WarehouseList />,
+                element: <SuspenseWrapper><WarehouseList /></SuspenseWrapper>,
               },
               {
                 path: 'settings/warehouses/new',
-                element: <WarehouseCreate />,
+                element: <SuspenseWrapper><WarehouseCreate /></SuspenseWrapper>,
               },
               {
                 path: 'settings/warehouses/:id',
-                element: <WarehouseDetail />,
+                element: <SuspenseWrapper><WarehouseDetail /></SuspenseWrapper>,
               },
               /* Settings - Locations */
               {
                 path: 'settings/locations',
-                element: <LocationList />,
+                element: <SuspenseWrapper><LocationList /></SuspenseWrapper>,
               },
               {
                 path: 'settings/locations/new',
-                element: <LocationCreate />,
+                element: <SuspenseWrapper><LocationCreate /></SuspenseWrapper>,
               },
               {
                 path: 'settings/locations/:id',
-                element: <LocationDetail />,
+                element: <SuspenseWrapper><LocationDetail /></SuspenseWrapper>,
               },
               /* Profile */
               {
                 path: 'profile',
-                element: <ProfilePage />,
+                element: <SuspenseWrapper><ProfilePage /></SuspenseWrapper>,
               },
             ],
           },
