@@ -216,6 +216,13 @@ export const DeliveryDetail: React.FC = () => {
         </div>
       )}
 
+      {delivery.status === 'done' && delivery.delivered_date && (
+        <div className="bg-slate-900/90 border border-emerald-500/30 p-4 rounded-xl flex items-center gap-2 text-xs text-emerald-400 font-mono">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <span>Dispatched & Validated on: <strong>{new Date(delivery.delivered_date).toLocaleString()}</strong></span>
+        </div>
+      )}
+
       {/* Line Items Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
         <h3 className="text-sm font-semibold text-slate-200 uppercase tracking-wider flex items-center gap-2 pb-3 border-b border-slate-800">

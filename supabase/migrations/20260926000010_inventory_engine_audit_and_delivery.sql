@@ -1,7 +1,9 @@
 -- StockSense Complete Inventory Engine Audit & Delivery RPC Migration
 -- Migration: 20260926000010_inventory_engine_audit_and_delivery.sql
 
--- 1. Ensure Table Check Constraints for Non-Negative Inventory Quantities
+-- 1. Ensure Table Check Constraints and Columns for Deliveries & Inventory
+ALTER TABLE public.deliveries ADD COLUMN IF NOT EXISTS delivered_date TIMESTAMPTZ;
+
 DO $$
 BEGIN
     IF NOT EXISTS (

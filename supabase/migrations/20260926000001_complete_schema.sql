@@ -126,6 +126,8 @@ CREATE TABLE IF NOT EXISTS public.deliveries (
     warehouse_id UUID NOT NULL REFERENCES public.warehouses(id) ON DELETE RESTRICT,
     source_location_id UUID REFERENCES public.locations(id) ON DELETE RESTRICT,
     status public.order_status NOT NULL DEFAULT 'draft',
+    scheduled_date TIMESTAMPTZ,
+    delivered_date TIMESTAMPTZ,
     notes TEXT,
     created_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
