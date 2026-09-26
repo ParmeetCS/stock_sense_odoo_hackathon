@@ -18,6 +18,10 @@ import { WarehouseDetail } from '../pages/warehouses/WarehouseDetail';
 import { LocationList } from '../pages/locations/LocationList';
 import { LocationCreate } from '../pages/locations/LocationCreate';
 import { LocationDetail } from '../pages/locations/LocationDetail';
+import { StockList } from '../pages/stock/StockList';
+import { ReceiptList } from '../pages/operations/receipts/ReceiptList';
+import { ReceiptCreate } from '../pages/operations/receipts/ReceiptCreate';
+import { ReceiptDetail } from '../pages/operations/receipts/ReceiptDetail';
 import { PlaceholderModule } from '../components/PlaceholderModule';
 
 const router = createBrowserRouter([
@@ -60,20 +64,20 @@ const router = createBrowserRouter([
               /* Stock */
               {
                 path: 'stock',
-                element: <PlaceholderModule title="Live Stock on Hand & Ledger" moduleName="Stock Levels" category="Inventory" />,
+                element: <StockList />,
               },
               /* Receipts */
               {
                 path: 'operations/receipts',
-                element: <PlaceholderModule title="Inbound Receipts Kanban & List" moduleName="Receipts" category="Operations" createPath="/operations/receipts/new" />,
+                element: <ReceiptList />,
               },
               {
                 path: 'operations/receipts/new',
-                element: <PlaceholderModule title="Create Inbound Receipt" moduleName="New Receipt" category="Operations" />,
+                element: <ReceiptCreate />,
               },
               {
                 path: 'operations/receipts/:id',
-                element: <PlaceholderModule title="Receipt Detail: WH/IN/0001" moduleName="Receipt Detail" category="Operations" />,
+                element: <ReceiptDetail />,
               },
               /* Deliveries */
               {

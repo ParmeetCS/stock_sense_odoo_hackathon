@@ -337,7 +337,7 @@ export async function fetchStockFilterMetadata(): Promise<{
 }> {
   try {
     const [prodRes, catRes, whRes, locRes] = await Promise.all([
-      supabase.from('products').select('id, name, sku, category_id').order('name', { ascending: true }),
+      supabase.from('products').select('*').order('name', { ascending: true }),
       supabase.from('categories').select('*').order('name', { ascending: true }),
       supabase.from('warehouses').select('*').eq('is_active', true).order('name', { ascending: true }),
       supabase.from('locations').select('*, warehouse:warehouses(id, code, name)').order('code', { ascending: true }),

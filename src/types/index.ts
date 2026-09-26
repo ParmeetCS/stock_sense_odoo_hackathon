@@ -170,13 +170,21 @@ export interface Receipt {
   destination_location_id?: string;
   status: OrderStatus;
   notes?: string;
+  scheduled_date?: string;
+  received_date?: string;
+  contact?: string;
   created_by?: string;
   created_at?: string;
   updated_at?: string;
   supplier?: Supplier;
   warehouse?: Warehouse;
   destination_location?: Location;
+  creator?: Profile;
   items?: ReceiptItem[];
+  // Computed fields
+  total_quantity_expected?: number;
+  total_quantity_received?: number;
+  total_cost?: number;
 }
 
 export interface ReceiptItem {
@@ -188,6 +196,43 @@ export interface ReceiptItem {
   unit_cost: number;
   created_at?: string;
   product?: Product;
+}
+
+export interface CreateReceiptItemInput {
+  product_id: string;
+  quantity_expected: number;
+  unit_cost?: number;
+}
+
+export interface CreateReceiptInput {
+  reference?: string;
+  supplier_id?: string;
+  warehouse_id: string;
+  destination_location_id: string;
+  status?: OrderStatus;
+  scheduled_date?: string;
+  contact?: string;
+  notes?: string;
+  items: CreateReceiptItemInput[];
+}
+
+export interface UpdateReceiptInput {
+  reference?: string;
+  supplier_id?: string;
+  warehouse_id?: string;
+  destination_location_id?: string;
+  status?: OrderStatus;
+  scheduled_date?: string;
+  received_date?: string;
+  contact?: string;
+  notes?: string;
+  items?: {
+    id?: string;
+    product_id: string;
+    quantity_expected: number;
+    quantity_received?: number;
+    unit_cost?: number;
+  }[];
 }
 
 export interface Delivery {
