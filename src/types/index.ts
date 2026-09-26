@@ -242,6 +242,7 @@ export interface Delivery {
   warehouse_id: string;
   source_location_id?: string;
   status: OrderStatus;
+  scheduled_date?: string;
   notes?: string;
   created_by?: string;
   created_at?: string;

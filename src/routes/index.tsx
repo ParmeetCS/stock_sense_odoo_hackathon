@@ -4,7 +4,6 @@ import { RootLayout } from '../layouts/RootLayout';
 import { AppShell } from '../layouts/AppShell';
 import { ProtectedRoute } from './ProtectedRoute';
 import { LoadingState } from '../components/ui/EmptyState';
-import { PlaceholderModule } from '../components/PlaceholderModule';
 
 // Dynamic lazy-loaded route components for performance & code splitting
 const Login = lazy(() => import('../pages/auth/Login').then((m) => ({ default: m.Login })));

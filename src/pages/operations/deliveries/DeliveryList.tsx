@@ -212,7 +212,7 @@ export const DeliveryList: React.FC = () => {
     <div className="space-y-6">
       <PageHeader
         title="Outbound Deliveries"
-        subtitle="Manage outbound dispatch orders, stock reservations, and customer shipment validations"
+        description="Manage outbound dispatch orders, stock reservations, and customer shipment validations"
         actions={
           <Button
             variant="primary"

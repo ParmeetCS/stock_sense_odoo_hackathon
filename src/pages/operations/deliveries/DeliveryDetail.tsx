@@ -7,8 +7,6 @@ import {
   Clock,
   AlertCircle,
   Building2,
-  MapPin,
-  Calendar,
   User,
   Package,
   CheckCheck,
@@ -130,7 +128,7 @@ export const DeliveryDetail: React.FC = () => {
     <div className="space-y-6">
       <PageHeader
         title={`Delivery Order ${delivery.reference}`}
-        subtitle="Outbound customer shipment order details and atomic validation"
+        description="Outbound customer shipment order details and atomic validation"
         actions={
           <div className="flex items-center gap-3">
             <Button variant="secondary" onClick={() => navigate('/operations/deliveries')}>

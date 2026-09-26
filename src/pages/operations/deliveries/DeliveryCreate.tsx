@@ -7,7 +7,6 @@ import {
   Plus,
   Trash2,
   ShieldCheck,
-  CheckCircle2,
 } from 'lucide-react';
 import { PageHeader } from '../../../components/ui/PageHeader';
 import { Button } from '../../../components/ui/Button';
@@ -208,7 +207,7 @@ export const DeliveryCreate: React.FC = () => {
     <div className="space-y-6">
       <PageHeader
         title="Create Outbound Delivery"
-        subtitle="Schedule a new customer delivery dispatch order"
+        description="Schedule a new customer delivery dispatch order"
         actions={
           <Button variant="secondary" onClick={() => navigate('/operations/deliveries')}>
             <ArrowLeft className="w-4 h-4 mr-1.5" /> Back to Deliveries
@@ -229,22 +228,28 @@ export const DeliveryCreate: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  id="del-ref"
-                  label="Order Reference"
-                  required
-                  value={reference}
-                  onChange={(e) => setReference(e.target.value)}
-                  placeholder="WH/OUT/0001"
-                />
+                <FormField label="Order Reference" required htmlFor="del-ref">
+                  <input
+                    id="del-ref"
+                    type="text"
+                    required
+                    value={reference}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReference(e.target.value)}
+                    placeholder="WH/OUT/0001"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500"
+                  />
+                </FormField>
 
-                <FormField
-                  id="del-customer"
-                  label="Customer / Recipient Name"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="e.g. Tata Consultancy Services"
-                />
+                <FormField label="Customer / Recipient Name" htmlFor="del-customer">
+                  <input
+                    id="del-customer"
+                    type="text"
+                    value={customerName}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomerName(e.target.value)}
+                    placeholder="e.g. Tata Consultancy Services"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500"
+                  />
+                </FormField>
 
                 <div className="space-y-1.5">
                   <label htmlFor="del-warehouse" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
@@ -290,13 +295,15 @@ export const DeliveryCreate: React.FC = () => {
                   )}
                 </div>
 
-                <FormField
-                  id="del-date"
-                  label="Scheduled Dispatch Date"
-                  type="date"
-                  value={scheduledDate}
-                  onChange={(e) => setScheduledDate(e.target.value)}
-                />
+                <FormField label="Scheduled Dispatch Date" htmlFor="del-date">
+                  <input
+                    id="del-date"
+                    type="date"
+                    value={scheduledDate}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setScheduledDate(e.target.value)}
+                    className="w-full h-10 px-3 rounded-lg bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500"
+                  />
+                </FormField>
               </div>
 
               <div>
@@ -326,7 +333,7 @@ export const DeliveryCreate: React.FC = () => {
               </div>
 
               <div className="space-y-3">
-                {items.map((item, idx) => (
+                {items.map((item) => (
                   <div
                     key={item.id}
                     className="grid grid-cols-12 gap-3 items-center bg-slate-950 p-3 rounded-lg border border-slate-800"
