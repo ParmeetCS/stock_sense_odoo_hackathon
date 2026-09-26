@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#c3c6d7","surface":"#f8f9ff","tertiary-container":"#0f69dc","on-primary":"#ffffff","surface-container-lowest":"#ffffff","outline":"#737686","background":"#f8f9ff","secondary-fixed":"#dae2fd","on-background":"#0b1c30","primary":"#004ac6","tertiary":"#0051b1","surface-tint":"#0053db","on-error":"#ffffff","tertiary-fixed-dim":"#adc6ff","on-secondary-fixed-variant":"#3f465c","on-surface":"#0b1c30","on-tertiary-fixed":"#001a42","surface-container-low":"#eff4ff","on-tertiary-container":"#edf0ff","tertiary-fixed":"#d8e2ff","surface-variant":"#d3e4fe","primary-container":"#2563eb","primary-fixed":"#dbe1ff","surface-dim":"#cbdbf5","on-tertiary":"#ffffff","on-secondary-container":"#5c647a","primary-fixed-dim":"#b4c5ff","surface-container-highest":"#d3e4fe","error":"#ba1a1a","on-primary-fixed-variant":"#003ea8","surface-bright":"#f8f9ff","surface-container-high":"#dce9ff","on-error-container":"#93000a","on-surface-variant":"#434655","secondary-fixed-dim":"#bec6e0","on-secondary-fixed":"#131b2e","on-primary-container":"#eeefff","error-container":"#ffdad6","secondary":"#565e74","on-primary-fixed":"#00174b","on-secondary":"#ffffff","surface-container":"#e5eeff","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eaf1ff","secondary-container":"#dae2fd","inverse-surface":"#213145","inverse-primary":"#b4c5ff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-2xl":"2rem","gutter-dense":"0.5rem","space-xl":"1.5rem","space-md":"0.75rem","margin-mobile":"0.75rem","space-lg":"1rem","space-sm":"0.5rem","margin":"1.5rem","space-xs":"0.25rem","gutter":"1rem"},"fontFamily":{"headline-sm":["Geist"],"display-lg":["Geist"],"body-lg":["Inter"],"label-sm":["Inter"],"headline-lg":["Geist"],"body-md":["Inter"],"headline-md":["Geist"],"mono-data":["Inter"],"body-sm":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-14 px-space-lg flex items-center gap-space-sm bg-inverse-surface"><img alt="Brand logo. - Primary color: #2563eb
+- Font: geist
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbXOn_0XAbDQlhGHI1r3BukZWC2zTmbZRbs9EPOd5Mhhw-WhwlpU8e2Ls0RaVSqmip2yWYus3Zg13s-QMm1J2AlSVi6B8IpaHWT2Omnijid8shhj9ZmojksHA7C_t3DpOUDzgG-vxX3ZynxfSoWfOf_Tc3SzueeD4e9Qz3Z959Rm-5zlGWm7mO9H0WrntKD0fbusKGKqNBcevr3JcAR_AggaaxOnMOA6kjC-TBs9ANXQ5uO6eOGutBwn8"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">StockSense</span><span class="font-label-sm text-label-sm text-outline-variant uppercase">WMS Core</span></div></div><nav class="px-space-sm py-space-md space-y-space-xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><div class="px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Main</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="dashboard" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Inventory</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="products" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span class="font-body-md text-body-md">Products</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="stock" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">layers</span><span class="font-body-md text-body-md">Stock</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Operations</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="receipts" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">call_received</span><span class="font-body-md text-body-md">Receipts</span></span><span class="px-space-xs py-0.5 rounded bg-primary text-on-primary font-mono-data text-label-sm">12</span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="deliveries" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">local_shipping</span><span class="font-body-md text-body-md">Deliveries</span></span><span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-mono-data text-label-sm">8</span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="transfers" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">swap_horiz</span><span class="font-body-md text-body-md">Transfers</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="adjustments" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-md text-body-md">Adjustments</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Audit</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="move-history" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">history</span><span class="font-body-md text-body-md">Move History</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Configuration</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="warehouses" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">warehouse</span><span class="font-body-md text-body-md">Warehouses</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="locations" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">pin_drop</span><span class="font-body-md text-body-md">Locations</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Account</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="profile" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">account_circle</span><span class="font-body-md text-body-md">Profile</span></span></a></nav></div><div class="p-space-md bg-inverse-surface/80 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm px-space-xs py-space-xs"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm text-inverse-on-surface">All Systems Operational</span></div><a class="flex items-center gap-space-sm px-space-xs py-space-xs font-body-sm text-body-sm text-outline-variant hover:text-error transition-colors" data-path="logout" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Sign Out</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1 rounded cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px] text-tertiary">home_work</span><span class="font-label-md text-label-md text-on-surface">Main Warehouse [WH01]</span><span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-sm text-outline text-[18px]">search</span><input class="w-72 h-8 pl-8 pr-12 bg-surface-container-lowest rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]" placeholder="Search inventory, orders, SKUs..." type="text"/><span class="absolute right-space-sm px-1.5 py-0.5 rounded bg-surface-container text-outline font-mono-data text-[10px]">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="relative p-space-xs rounded-full hover:bg-surface-container transition-colors cursor-pointer"><span class="material-symbols-outlined text-[20px] text-on-surface-variant">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></div><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface">Rajesh Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">Sr. Operations Mgr</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-variant" src="https://lh3.googleusercontent.com/aida/AEtjO1UpYe1B5-W3fSEckesRB-vEKusxxbjL5aJ4sEpkihEdll-0nDGWBv0WF6HVRQTUishtz1UzizcAj5ymQc4ZhKrsExpMLoFB8wqEU8-jio_xwh7SOMtbJixNWjdXKfhPKMJ8vhLrPMUqhoUSf1dvzykKB33_MpVwsxLuHo0ND7Tnjfm511mYN8cLb3aHJEnHp7-HRywVrOSi7xkS3Qd9HIVa7ALwm8-4uaCg7whkttq55jyX2wXHZYRWYbA"/></div></div></header><main class="relative w-full pt-14 bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive Top Action & Meta Section -->
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Facility & Breadcrumb Sub-bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span>Configuration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-mono-data font-semibold">Locations &amp; Bins</span>
+</div>
+<div class="flex items-baseline gap-space-md">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Warehouse Locations &amp; Bins Hierarchy</h1>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-mono-data text-label-sm font-semibold">WH-01-CORE</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl">
+          Physical spatial coordinates, storage taxonomy, load limits, and volumetric bin allocation for Main Warehouse [WH01].
+        </p>
+</div>
+<!-- Action Suite -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container text-body-sm font-medium shadow-sm transition-all" id="btn-labels">
+<span class="material-symbols-outlined text-[18px] text-outline">qr_code_2</span>
+<span>Print Labels</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container text-body-sm font-medium shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px] text-outline">file_upload</span>
+<span>Import Layout</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-lowest text-tertiary hover:bg-surface-container text-body-sm font-medium shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+<span>3D Heatmap</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-1.5 rounded bg-primary-container text-on-primary hover:bg-primary text-body-sm font-medium shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Create Location/Bin</span>
+</button>
+</div>
+</div>
+<!-- Facility Switcher Tabs -->
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl w-fit">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-headline-sm text-label-md shadow-sm transition-colors flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+        Main Warehouse [WH01]
+        <span class="ml-1 px-1.5 py-0.2 bg-primary-fixed text-on-primary-fixed text-[10px] rounded font-mono-data">Active</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs">
+        Production Warehouse [WH02]
+      </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs">
+        Regional Spoke [WH03]
+      </button>
+</div>
+<!-- Spatial Performance Metrics Bento Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Total Locations -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Total Defined Nodes</span>
+<span class="material-symbols-outlined text-[20px] text-outline">account_tree</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-headline-lg text-headline-lg text-on-surface">284</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface-container-low px-1.5 py-0.5 rounded font-mono-data">5 Zones</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Configured bins, pick-slots &amp; cross-docks</div>
+</div>
+<!-- Occupancy Rate -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Occupied Bins</span>
+<span class="material-symbols-outlined text-[20px] text-tertiary">inventory_2</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-headline-lg text-headline-lg text-on-surface">236 <span class="text-body-md text-outline">/ 284</span></div>
+<span class="font-headline-sm text-headline-sm text-primary font-mono-data">83.1%</span>
+</div>
+<!-- Micro Occupancy Meter -->
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-2">
+<div class="bg-primary h-full rounded-full" style="width: 83.1%;"></div>
+</div>
+</div>
+<!-- Free / Staging Ready -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Ready for Putaway</span>
+<span class="material-symbols-outlined text-[20px] text-outline">download_for_offline</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-headline-lg text-headline-lg text-on-surface">48</div>
+<span class="font-label-sm text-label-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded font-mono-data">16.9% Free</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Immediate staging capacity available</div>
+</div>
+<!-- Fast-Pick Ground Faces -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Fast-Pick Faces</span>
+<span class="material-symbols-outlined text-[20px] text-tertiary">bolt</span>
+</div>
+<div class="mt-space-sm flex items-baseline justify-between">
+<div class="font-headline-lg text-headline-lg text-on-surface">64</div>
+<span class="font-label-sm text-label-sm text-tertiary-container bg-surface-container-low px-1.5 py-0.5 rounded font-mono-data">Tier 0 / Ground</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Direct pallet jack accessible pick faces</div>
+</div>
+</div>
+<!-- Main Two-Column Master / Detail Architecture -->
+<div class="grid grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Structural Tree Hierarchy (4 cols on lg, 5 on xl) -->
+<div class="col-span-12 lg:col-span-5 xl:col-span-4 bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col">
+<!-- Tree Header & Quick Search -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">lan</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Hierarchy Tree</span>
+</div>
+<div class="flex items-center gap-space-xs text-outline">
+<button class="p-1 hover:text-on-surface hover:bg-surface-container rounded" title="Expand All">
+<span class="material-symbols-outlined text-[18px]">unfold_more</span>
+</button>
+<button class="p-1 hover:text-on-surface hover:bg-surface-container rounded" title="Collapse All">
+<span class="material-symbols-outlined text-[18px]">unfold_less</span>
+</button>
+</div>
+</div>
+<div class="relative mt-space-xs mb-space-sm">
+<span class="material-symbols-outlined absolute left-space-sm top-2 text-[16px] text-outline">filter_list</span>
+<input class="w-full h-8 pl-8 pr-3 bg-surface-container-low rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" placeholder="Filter zones, racks, bin codes..." type="text"/>
+</div>
+<!-- The Interactive Tree Structure -->
+<div class="overflow-y-auto max-h-[720px] pr-1 space-y-0.5 text-body-sm font-body-sm select-none">
+<!-- Root Node: WH01 -->
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded-lg bg-surface-container-low text-on-surface cursor-pointer font-medium">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-tertiary">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-primary">warehouse</span>
+<span class="truncate font-semibold">WH01 (Main Warehouse)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline px-1.5 py-0.2 rounded bg-surface-container-lowest">284 bins</span>
+</div>
+<!-- Level 1: Zone 1 (Open) -->
+<div class="pl-4 flex flex-col space-y-0.5">
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface font-medium">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">grid_view</span>
+<span class="truncate">Zone 1: High-Rack Pallet</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">120 Bins</span>
+</div>
+<!-- Level 2: Rack A (Open) -->
+<div class="pl-4 flex flex-col space-y-0.5">
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface font-medium">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-outline">view_week</span>
+<span class="truncate">Rack A (Heavy Industrial)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">40 Bins</span>
+</div>
+<!-- Level 3: Shelves / Aisles -->
+<div class="pl-4 flex flex-col space-y-0.5">
+<!-- Shelf A-01 -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">table_rows</span>
+<span>Shelf A-01 (Ground Heavy)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">4 Bins</span>
+</div>
+<!-- Shelf A-02 -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">table_rows</span>
+<span>Shelf A-02 (Mid Tier)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">4 Bins</span>
+</div>
+<!-- Shelf A-04 (Expanded & Focused) -->
+<div class="flex flex-col space-y-0.5">
+<div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container text-on-surface cursor-pointer font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">table_rows</span>
+<span>Shelf A-04 (Level 2)</span>
+</div>
+<span class="font-mono-data text-label-sm text-primary font-semibold">4 Bins</span>
+</div>
+<!-- Level 4: Bins inside A-04 -->
+<div class="pl-5 flex flex-col space-y-0.5">
+<!-- Bin A-04-10 -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span class="font-mono-data">A-04-10</span>
+<span class="text-outline truncate max-w-[90px] text-[11px]">(Steel Rods)</span>
+</div>
+<span class="font-mono-data text-label-sm text-error">95% Full</span>
+</div>
+<!-- Bin A-04-11 -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="font-mono-data">A-04-11</span>
+<span class="text-outline truncate max-w-[90px] text-[11px]">(Sheets)</span>
+</div>
+<span class="font-mono-data text-label-sm text-tertiary">80% Full</span>
+</div>
+<!-- Bin A-04-12 [ACTIVE FOCUS SELECTION] -->
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded bg-primary-container text-on-primary cursor-pointer shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-container-lowest"></span>
+<span class="font-mono-data font-bold tracking-tight">A-04-12</span>
+<span class="text-on-primary-container text-[11px] truncate max-w-[110px]">[DESK001 Teak]</span>
+</div>
+<span class="font-mono-data text-label-sm bg-on-primary/20 px-1 py-0.2 rounded text-on-primary">50 units</span>
+</div>
+<!-- Bin A-04-13 -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="font-mono-data">A-04-13</span>
+<span class="text-outline text-[11px]">(Empty)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">0% Free</span>
+</div>
+</div>
+</div>
+<!-- Rack B -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">view_week</span>
+<span>Rack B (Commercial &amp; Seating)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">42 Bins</span>
+</div>
+<!-- Rack C -->
+<div class="flex items-center justify-between px-space-xs py-1 rounded hover:bg-surface-container cursor-pointer text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">view_week</span>
+<span>Rack C (Hardware Fasteners)</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">38 Bins</span>
+</div>
+</div>
+</div>
+<!-- Other Zones (Collapsed) -->
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">grid_view</span>
+<span class="truncate">Zone 2: Consumables &amp; Fast Mover</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">65 Bins</span>
+</div>
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">grid_view</span>
+<span class="truncate">Zone 3: Cross-Dock &amp; Staging Bays</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">35 Bins</span>
+</div>
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">grid_view</span>
+<span class="truncate">Zone 4: Outbound Dispatch Docks</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">40 Bins</span>
+</div>
+<div class="flex items-center justify-between px-space-xs py-1.5 rounded hover:bg-surface-container cursor-pointer text-on-surface">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<span class="material-symbols-outlined text-[16px] text-outline">grid_view</span>
+<span class="truncate">Zone 5: QA Scrap &amp; Returns</span>
+</div>
+<span class="font-mono-data text-label-sm text-outline">24 Bins</span>
+</div>
+</div>
+</div>
+<!-- Tree Footnote -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span>Hierarchy sync: Live</span>
+<span class="text-tertiary cursor-pointer hover:underline">Download Hierarchy JSON</span>
+</div>
+</div>
+<!-- RIGHT COLUMN: Detailed Location & Bin Control Console (8 cols on lg, 8 on xl) -->
+<div class="col-span-12 lg:col-span-7 xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Selected Node Hero Inspection Header Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<!-- Top Row with Breadcrumb & Coordinates -->
+<div class="flex flex-wrap items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs font-mono-data text-label-sm text-tertiary font-semibold uppercase tracking-wider">
+<span>WH01</span>
+<span>/</span>
+<span>Zone 1 (High-Rack)</span>
+<span>/</span>
+<span>Aisle 04</span>
+<span>/</span>
+<span>Rack A</span>
+<span>/</span>
+<span>Tier 2</span>
+</div>
+<div class="flex items-center gap-space-sm mt-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Bin A-04-12</h2>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-mono-data text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">qr_code</span>
+                  LOC-WH01-RA-04-12
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+                  Pallet Slot
+                </span>
+</div>
+</div>
+<!-- Action buttons for Bin -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container text-body-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary">swap_horiz</span>
+<span>Reallocate</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container text-body-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">fact_check</span>
+<span>Cycle Count</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-low text-error hover:bg-error-container text-body-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Lock Bay</span>
+</button>
+</div>
+</div>
+<!-- Volumetric & Capacity Gauges -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+<!-- Dimensions -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between">
+<span class="font-label-sm text-label-sm uppercase text-outline font-semibold">Physical Dimensions</span>
+<div class="mt-1 font-headline-sm text-headline-sm text-on-surface">120 × 100 × 180 cm</div>
+<span class="text-outline text-body-sm mt-0.5 font-mono-data">Volume: 2.16 m³ (Heavy Rack)</span>
+</div>
+<!-- Weight Utilization -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase text-outline font-semibold">Weight Limit</span>
+<span class="font-mono-data text-label-sm font-semibold text-primary">56.8%</span>
+</div>
+<div class="mt-1 font-headline-sm text-headline-sm text-on-surface">1,420 <span class="text-body-md text-outline">/ 2,500 kg</span></div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-1.5">
+<div class="bg-primary h-full rounded-full" style="width: 56.8%;"></div>
+</div>
+</div>
+<!-- Accessibility & Tier -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between">
+<span class="font-label-sm text-label-sm uppercase text-outline font-semibold">Forklift Elevation</span>
+<div class="mt-1 font-headline-sm text-headline-sm text-on-surface">Tier 2 (4.50 m)</div>
+<div class="flex items-center gap-1 text-on-surface-variant text-body-sm mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">forklift</span>
+<span>Reach Truck Required</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Current Stored Inventory Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">inventory</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Stored Goods in Bin A-04-12</h3>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container text-tertiary font-mono-data text-label-sm font-semibold">1 SKU Allocated</span>
+</div>
+<!-- Product Itemized Table -->
+<div class="overflow-x-auto rounded-lg bg-surface-container-low">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container font-label-sm text-label-sm text-outline uppercase tracking-wider">
+<tr>
+<th class="py-2.5 px-space-md">Product / SKU</th>
+<th class="py-2.5 px-space-md">Batch / Lot</th>
+<th class="py-2.5 px-space-md text-right">Qty</th>
+<th class="py-2.5 px-space-md text-right">Reserved</th>
+<th class="py-2.5 px-space-md text-right">Available</th>
+<th class="py-2.5 px-space-md text-right">Net Value (₹)</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-md">
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-space-sm px-space-md flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded object-cover shadow-sm" data-alt="High quality commercial office desk crafted from polished dark teak hardwood with brushed metallic cable management grommets in a clean studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5D7DGB0E1lxfnrHucupkPU1TsWYUKNV1cL82iv7NY-MzpGESHORD3YFogg4ngiXePnimbbF5eonOV8fQZCOL6HrrQOJKGSr5eMvM6TFxPWSJ3IQMWWjVQUvIM12Z-B4xnweA4c8HWKJFnNi0TUPkCSqNeZPWSmdv2_kFpPttBinVP4tCVJdqswLUTtL5c-4JsiOt1a4RDh_OjcWmmSLFumRPBWHIRKSBktLkW7P4CcPpyh9oiRdZ1"/>
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-md text-on-surface font-semibold">Office Desk Solid Teak</span>
+<span class="text-outline font-mono-data text-label-sm">SKU: DESK001</span>
+</div>
+</td>
+<td class="py-space-sm px-space-md font-mono-data text-on-surface-variant">#TK-2024-Q3</td>
+<td class="py-space-sm px-space-md text-right font-mono-data font-bold text-on-surface">50 pcs</td>
+<td class="py-space-sm px-space-md text-right font-mono-data text-tertiary">5 pcs</td>
+<td class="py-space-sm px-space-md text-right font-mono-data text-on-surface font-bold">45 pcs</td>
+<td class="py-space-sm px-space-md text-right font-mono-data text-on-surface font-semibold">₹7,25,000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Live Storage Breakdown Strip -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">history</span>
+<span class="text-on-surface-variant">Last Inward:</span>
+<span class="font-mono-data font-semibold text-on-surface">WH/IN/0001</span>
+<span class="text-outline text-label-sm">(Today at 11:45 IST by Rajesh Sharma)</span>
+</div>
+<div class="flex items-center gap-space-xs text-label-sm font-mono-data text-primary cursor-pointer hover:underline">
+<span>View Product Lot Details</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</div>
+</div>
+</div>
+<!-- Putaway Directives & Environmental Rule Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Putaway Directives -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">rule</span>
+<h4 class="font-headline-sm text-label-md text-on-surface font-bold uppercase tracking-wider">Putaway Constraints</h4>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm pt-1">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Allowed Product Classes:</span>
+<span class="font-medium text-on-surface">Finished Hardwood, Structural Metal</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Max Stack Height:</span>
+<span class="font-mono-data font-semibold text-on-surface">2 Pallet Tiers</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Hazardous Material:</span>
+<span class="font-mono-data text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">block</span> Prohibited
+                </span>
+</div>
+</div>
+</div>
+<!-- Environmental & Storage Conditions -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">thermostat</span>
+<h4 class="font-headline-sm text-label-md text-on-surface font-bold uppercase tracking-wider">Atmospheric &amp; Handling</h4>
+</div>
+<div class="space-y-space-xs font-body-sm text-body-sm pt-1">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Controlled Climate:</span>
+<span class="font-medium text-on-surface">Ambient (18°C – 32°C)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Humidity Target:</span>
+<span class="font-mono-data font-semibold text-on-surface">45% – 60% RH</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Access Vehicle:</span>
+<span class="font-medium text-primary">Class II Reach Truck</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Audit Trail & Move History for Bin A-04-12 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-outline">timeline</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Bin Transaction History</h3>
+</div>
+<span class="text-outline text-label-sm font-label-sm">Audited through WMS Core</span>
+</div>
+<div class="relative pl-6 space-y-4 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<!-- Timeline Item 1 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></span>
+<div class="flex items-center gap-space-sm text-body-sm">
+<span class="font-mono-data font-semibold text-on-surface">WH/IN/0001</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container font-mono-data text-label-sm text-primary">+50 DESK001 Received</span>
+<span class="text-outline text-label-sm">Today, 11:45 IST</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">
+                Goods received from Godrej Hardwood Suppliers. Forklift Operator: Anil Kumar. Confirmed by Rajesh Sharma.
+              </div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-outline ring-4 ring-surface-container-lowest"></span>
+<div class="flex items-center gap-space-sm text-body-sm">
+<span class="font-mono-data font-semibold text-on-surface">WH/INT/0882</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high font-mono-data text-label-sm text-on-surface">-30 DESK001 Transferred to Bay 3</span>
+<span class="text-outline text-label-sm">Yesterday, 16:20 IST</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">
+                Picked for outbound shipping batch #SO-9921 via Staging Zone 3.
+              </div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-outline ring-4 ring-surface-container-lowest"></span>
+<div class="flex items-center gap-space-sm text-body-sm">
+<span class="font-mono-data font-semibold text-on-surface">AUDIT/CYC-44</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container font-mono-data text-label-sm text-tertiary">Cycle Count Verified</span>
+<span class="text-outline text-label-sm">08 Oct 2024, 09:15 IST</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">
+                Discrepancy 0%. Weight sensor telemetry verified against RFID pallet tag.
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Print Modal / Placard Preview Slide-Over Simulation (Interactive with JS) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm" id="label-modal">
+<div class="bg-surface-container-lowest rounded-2xl shadow-xl w-full max-w-lg p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[24px] text-primary">print</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Print Placard Label</h3>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors" id="close-modal">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col items-center justify-center border-dashed border-2 border-outline-variant/50 text-center gap-space-sm">
+<div class="font-headline-lg text-headline-lg font-mono-data tracking-tight text-on-surface">A-04-12</div>
+<div class="font-label-sm text-label-sm text-outline uppercase">LOC-WH01-RA-04-12</div>
+<!-- Barcode Graphic Mockup -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-inner flex flex-col items-center">
+<div class="w-48 h-12 flex justify-between items-end gap-1">
+<span class="w-1.5 h-full bg-on-surface"></span>
+<span class="w-1 h-3/4 bg-on-surface"></span>
+<span class="w-2 h-full bg-on-surface"></span>
+<span class="w-0.5 h-full bg-on-surface"></span>
+<span class="w-3 h-full bg-on-surface"></span>
+<span class="w-1 h-1/2 bg-on-surface"></span>
+<span class="w-2 h-full bg-on-surface"></span>
+<span class="w-0.5 h-3/4 bg-on-surface"></span>
+<span class="w-1.5 h-full bg-on-surface"></span>
+<span class="w-3 h-full bg-on-surface"></span>
+<span class="w-1 h-3/4 bg-on-surface"></span>
+<span class="w-2 h-full bg-on-surface"></span>
+<span class="w-0.5 h-full bg-on-surface"></span>
+<span class="w-1.5 h-full bg-on-surface"></span>
+</div>
+<span class="font-mono-data text-[10px] text-outline mt-1 tracking-widest">*LOC-WH01-RA-04-12*</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">Size: 4" × 6" Thermal Transfer Poly-label</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-lg py-1.5 rounded bg-surface-container text-on-surface font-body-sm font-medium" id="cancel-modal">Cancel</button>
+<button class="px-space-xl py-1.5 rounded bg-primary-container text-on-primary font-body-sm font-medium shadow transition-all hover:bg-primary" id="confirm-print">Dispatch to Zebra ZT411</button>
+</div>
+</div>
+</div>
+<!-- Interactive JavaScript logic for toggles and interactions -->
+<script>
+    (function() {
+      const btnLabels = document.getElementById('btn-labels');
+      const labelModal = document.getElementById('label-modal');
+      const closeModal = document.getElementById('close-modal');
+      const cancelModal = document.getElementById('cancel-modal');
+      const confirmPrint = document.getElementById('confirm-print');
+
+      if (btnLabels && labelModal) {
+        btnLabels.addEventListener('click', () => {
+          labelModal.classList.remove('hidden');
+        });
+      }
+
+      const hideModal = () => {
+        if (labelModal) labelModal.classList.add('hidden');
+      };
+
+      if (closeModal) closeModal.addEventListener('click', hideModal);
+      if (cancelModal) cancelModal.addEventListener('click', hideModal);
+      if (confirmPrint) {
+        confirmPrint.addEventListener('click', () => {
+          confirmPrint.innerText = 'Printing...';
+          setTimeout(() => {
+            confirmPrint.innerText = 'Sent to Printer!';
+            setTimeout(() => {
+              confirmPrint.innerText = 'Dispatch to Zebra ZT411';
+              hideModal();
+            }, 800);
+          }, 600);
+        });
+      }
+    })();
+  </script>
+</div></main></div></body></html>

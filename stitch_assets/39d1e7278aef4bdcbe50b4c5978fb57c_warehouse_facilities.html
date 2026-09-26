@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#c3c6d7","surface":"#f8f9ff","tertiary-container":"#0f69dc","on-primary":"#ffffff","surface-container-lowest":"#ffffff","outline":"#737686","background":"#f8f9ff","secondary-fixed":"#dae2fd","on-background":"#0b1c30","primary":"#004ac6","tertiary":"#0051b1","surface-tint":"#0053db","on-error":"#ffffff","tertiary-fixed-dim":"#adc6ff","on-secondary-fixed-variant":"#3f465c","on-surface":"#0b1c30","on-tertiary-fixed":"#001a42","surface-container-low":"#eff4ff","on-tertiary-container":"#edf0ff","tertiary-fixed":"#d8e2ff","surface-variant":"#d3e4fe","primary-container":"#2563eb","primary-fixed":"#dbe1ff","surface-dim":"#cbdbf5","on-tertiary":"#ffffff","on-secondary-container":"#5c647a","primary-fixed-dim":"#b4c5ff","surface-container-highest":"#d3e4fe","error":"#ba1a1a","on-primary-fixed-variant":"#003ea8","surface-bright":"#f8f9ff","surface-container-high":"#dce9ff","on-error-container":"#93000a","on-surface-variant":"#434655","secondary-fixed-dim":"#bec6e0","on-secondary-fixed":"#131b2e","on-primary-container":"#eeefff","error-container":"#ffdad6","secondary":"#565e74","on-primary-fixed":"#00174b","on-secondary":"#ffffff","surface-container":"#e5eeff","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eaf1ff","secondary-container":"#dae2fd","inverse-surface":"#213145","inverse-primary":"#b4c5ff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-2xl":"2rem","gutter-dense":"0.5rem","space-xl":"1.5rem","space-md":"0.75rem","margin-mobile":"0.75rem","space-lg":"1rem","space-sm":"0.5rem","margin":"1.5rem","space-xs":"0.25rem","gutter":"1rem"},"fontFamily":{"headline-sm":["Geist"],"display-lg":["Geist"],"body-lg":["Inter"],"label-sm":["Inter"],"headline-lg":["Geist"],"body-md":["Inter"],"headline-md":["Geist"],"mono-data":["Inter"],"body-sm":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-14 px-space-lg flex items-center gap-space-sm bg-inverse-surface"><img alt="Brand logo. - Primary color: #2563eb
+- Font: geist
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbXOn_0XAbDQlhGHI1r3BukZWC2zTmbZRbs9EPOd5Mhhw-WhwlpU8e2Ls0RaVSqmip2yWYus3Zg13s-QMm1J2AlSVi6B8IpaHWT2Omnijid8shhj9ZmojksHA7C_t3DpOUDzgG-vxX3ZynxfSoWfOf_Tc3SzueeD4e9Qz3Z959Rm-5zlGWm7mO9H0WrntKD0fbusKGKqNBcevr3JcAR_AggaaxOnMOA6kjC-TBs9ANXQ5uO6eOGutBwn8"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">StockSense</span><span class="font-label-sm text-label-sm text-outline-variant uppercase">WMS Core</span></div></div><nav class="px-space-sm py-space-md space-y-space-xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm rounded-lg"><div class="px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Main</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="dashboard" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Inventory</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="products" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span class="font-body-md text-body-md">Products</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="stock" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">layers</span><span class="font-body-md text-body-md">Stock</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Operations</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="receipts" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">call_received</span><span class="font-body-md text-body-md">Receipts</span></span><span class="px-space-xs py-0.5 rounded bg-primary text-on-primary font-mono-data text-label-sm">12</span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="deliveries" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">local_shipping</span><span class="font-body-md text-body-md">Deliveries</span></span><span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-mono-data text-label-sm">8</span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="transfers" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">swap_horiz</span><span class="font-body-md text-body-md">Transfers</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="adjustments" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-md text-body-md">Adjustments</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Audit</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="move-history" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">history</span><span class="font-body-md text-body-md">Move History</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Configuration</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="warehouses" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">warehouse</span><span class="font-body-md text-body-md">Warehouses</span></span></a><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="locations" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">pin_drop</span><span class="font-body-md text-body-md">Locations</span></span></a><div class="pt-space-sm px-space-sm py-space-xs font-label-sm text-label-sm text-outline-variant uppercase">Account</div><a class="flex items-center justify-between px-space-md py-space-xs rounded text-inverse-on-surface hover:bg-surface-variant/20 hover:text-on-primary transition-colors" data-path="profile" href="#"><span class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">account_circle</span><span class="font-body-md text-body-md">Profile</span></span></a></nav></div><div class="p-space-md bg-inverse-surface/80 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm px-space-xs py-space-xs"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm text-inverse-on-surface">All Systems Operational</span></div><a class="flex items-center gap-space-sm px-space-xs py-space-xs font-body-sm text-body-sm text-outline-variant hover:text-error transition-colors" data-path="logout" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Sign Out</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1 rounded cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px] text-tertiary">home_work</span><span class="font-label-md text-label-md text-on-surface">Main Warehouse [WH01]</span><span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-sm text-outline text-[18px]">search</span><input class="w-72 h-8 pl-8 pr-12 bg-surface-container-lowest rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-[0_1px_2px_rgba(15,23,42,0.04)]" placeholder="Search inventory, orders, SKUs..." type="text"/><span class="absolute right-space-sm px-1.5 py-0.5 rounded bg-surface-container text-outline font-mono-data text-[10px]">⌘K</span></div></div><div class="flex items-center gap-space-md"><div class="relative p-space-xs rounded-full hover:bg-surface-container transition-colors cursor-pointer"><span class="material-symbols-outlined text-[20px] text-on-surface-variant">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></div><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface">Rajesh Sharma</span><span class="font-body-sm text-body-sm text-on-surface-variant">Sr. Operations Mgr</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-variant" src="https://lh3.googleusercontent.com/aida/AEtjO1UpYe1B5-W3fSEckesRB-vEKusxxbjL5aJ4sEpkihEdll-0nDGWBv0WF6HVRQTUishtz1UzizcAj5ymQc4ZhKrsExpMLoFB8wqEU8-jio_xwh7SOMtbJixNWjdXKfhPKMJ8vhLrPMUqhoUSf1dvzykKB33_MpVwsxLuHo0ND7Tnjfm511mYN8cLb3aHJEnHp7-HRywVrOSi7xkS3Qd9HIVa7ALwm8-4uaCg7whkttq55jyX2wXHZYRWYbA"/></div></div></header><main class="relative w-full pt-14 bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller Script embedded at end -->
+<div class="px-space-xl py-space-xl space-y-space-xl max-w-[1720px] mx-auto w-full">
+<!-- Breadcrumb & Network Overview Header -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="hover:text-primary transition-colors cursor-pointer">Configuration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-label-md text-label-md">Warehouses</span>
+<span class="mx-space-xs inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="inline-flex items-center gap-1 text-primary font-mono-data text-label-sm bg-surface-container-high px-space-xs py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> Live Multi-Facility Telemetry
+          </span>
+</div>
+<div class="flex items-baseline gap-space-md">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Warehouse Facilities</h1>
+<span class="font-mono-data text-body-sm text-on-surface-variant">5 Sites Synchronized</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          Multi-facility network administration, live volumetric utilization, dock logistics, and operational parameters across central nodes and spokes.
+        </p>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center flex-wrap gap-space-sm self-start lg:self-auto">
+<button class="flex items-center gap-space-xs h-9 px-space-md rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors shadow-sm cursor-pointer" id="toggle-map-btn">
+<span class="material-symbols-outlined text-[18px] text-tertiary">map</span>
+<span>Network Map View</span>
+</button>
+<button class="flex items-center gap-space-xs h-9 px-space-md rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors shadow-sm cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span>Export Facilities Directory</span>
+</button>
+<button class="flex items-center gap-space-xs h-9 px-space-lg rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md shadow-sm transition-all transform active:scale-95 cursor-pointer" id="open-add-modal-btn">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Add New Warehouse</span>
+</button>
+</div>
+</div>
+<!-- Collapsible Live Network Map Visual Section -->
+<div class="hidden transition-all duration-300 overflow-hidden bg-surface-container-lowest rounded-xl p-space-lg shadow-sm" id="network-map-panel">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Pan-India Industrial Logistics Mesh</span>
+<span class="font-label-sm text-label-sm bg-surface-container px-2 py-0.5 rounded text-outline">Geo-Telemetry Feed</span>
+</div>
+<button class="text-outline hover:text-on-surface p-1 rounded hover:bg-surface-container-low cursor-pointer" id="close-map-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="w-full h-72 rounded-lg bg-cover bg-center relative overflow-hidden shadow-inner flex items-end p-space-lg" data-location="Bengaluru, Karnataka, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJSKL0AYLwHTtBCFCbXbyEJ7uxfFw7MXIGvYMlZFf-HJOLxSV5GNLpqR2-ASejqGyUDrxRMr-P41D64uiesuIlgSrvieVyiiRk_9vkAFgYYfd1BrT-PaowF0dLt4jzuzakSG3vgLFJEpDAYlnd6MqoyK2YJrZdWrfmaiwg8RvNcsmOsmmsF_r8ItugCCWGSvR4Cem8qXpNPnOuUG5zNEKbA2xVz1QCbXQH3Qaias0sD0lb87JHg5xN')">
+<div class="relative z-10 bg-inverse-surface/90 backdrop-blur-md text-inverse-on-surface p-space-md rounded-lg max-w-lg shadow-xl">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed">Active Telemetry Links</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-low">
+            Active inter-node shuttles operating along Bengaluru (WH01/WH02) ⇄ Mumbai (WH03 Bhiwandi Corridor). Average route transit duration: 18h 40m with GPS integrity verified.
+          </p>
+</div>
+</div>
+</div>
+<!-- 4 High-Density KPI / Volumetric Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Active Warehouse Facilities</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">5 Sites</span>
+<span class="font-label-sm text-label-sm text-outline-variant font-mono-data">/ 5 Registered</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-[22px]">corporate_fare</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-sm rounded-b-xl flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary"></span> 100% Operational Status
+          </span>
+<span class="font-mono-data text-label-sm text-secondary">WH01 - WH05</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Overall Network Utilization</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">82.4%</span>
+<span class="font-label-sm text-label-sm text-tertiary font-mono-data">+3.2% MoM</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container-low text-tertiary">
+<span class="material-symbols-outlined text-[22px]">pie_chart</span>
+</div>
+</div>
+<div class="mt-space-md space-y-1.5">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 82.4%"></div>
+</div>
+<div class="flex justify-between font-mono-data text-body-sm text-on-surface-variant">
+<span>1,42,000 sq.ft filled</span>
+<span class="text-outline">1,72,500 total</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Total Active Storage Zones</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">24 Zones</span>
+<span class="font-label-sm text-label-sm text-outline-variant font-mono-data">5 Facilities</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container-low text-secondary">
+<span class="material-symbols-outlined text-[22px]">shelves</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-sm rounded-b-xl flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="truncate">18 Ambient • 4 Heavy • 2 Cold</span>
+<span class="font-mono-data text-primary font-label-sm">Live</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Active Logistics Workforce</span>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">142 Staff</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono-data">Shift #2</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-container-low text-tertiary">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-sm rounded-b-xl flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-tertiary">cloud_download</span> 3-Shift 24x7 Roster
+          </span>
+<span class="font-label-sm text-label-sm text-secondary font-mono-data">98.2% Present</span>
+</div>
+</div>
+</div>
+<!-- Facility Cards: Primary Key Hubs Detailed Showcase -->
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Primary Hubs &amp; Operational Nodes</h2>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-mono-data text-label-sm">3 Flagships</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span>Sort by:</span>
+<select class="bg-surface-container-lowest px-2 py-1 rounded text-on-surface font-label-md text-label-md shadow-sm outline-none cursor-pointer focus:ring-1 focus:ring-primary">
+<option>Highest Utilization</option>
+<option>Floor Area (Sq Ft)</option>
+<option>Valuation INR</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- CARD 1: WH01 Main Fulfillment Center -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<!-- Card Header & Status Banner -->
+<div class="p-space-lg pb-0">
+<div class="relative h-40 -mx-space-lg -mt-space-lg mb-space-md overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern expansive high-ceiling logistics warehouse interior with bright LED lighting, industrial high-bay racking systems, organized pallet stacks, precision automated sorting bays in cool corporate blue and slate tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA95ISwTJYp1j6DNTdEfB8ypgiv9gCc-fPb1ZO8evi88OQIN2rKAmEvvKTxNDUoP1ZQA6Xb-PmScXGoPZzEktE38z9aJXevbw6H044HeLGeyWE3v2t7Fd-mYNCsf6Ia9twUR8bnHyqk2cj_A_W1xlV31mb090jQN02ypkHS6otLRfEUuq2wdiXec3xs0Jihaiw-m5_6PXcigcK2WbpPC2vclsr7uU-4eQCKyc8UKeNTNGJpDDl0_e2k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/30"></div>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="bg-inverse-surface/90 backdrop-blur-sm text-on-primary font-mono-data text-label-sm px-2 py-0.5 rounded">WH01</span>
+<span class="inline-flex items-center gap-1.5 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-0.5 rounded shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-lowest"></span> Primary Node
+                </span>
+</div>
+<div class="absolute top-space-md right-space-md bg-surface-container-lowest/95 backdrop-blur-sm px-2 py-1 rounded text-on-surface font-mono-data text-label-sm shadow-sm">
+                SLA 99.4%
+              </div>
+<div class="absolute bottom-space-xs left-space-md right-space-md flex justify-between items-end">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Central Fulfillment &amp; High-Rack Hub</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Main Fulfillment Center</h3>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pb-space-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="truncate">Peenya Industrial Area, Phase II, Bengaluru, Karnataka</span>
+</div>
+<!-- Metrics Specs Grid -->
+<div class="grid grid-cols-2 gap-space-sm py-space-sm bg-surface-container-low/60 rounded-lg px-space-md my-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Storage Space</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">65,000 sq.ft</span>
+<span class="font-label-sm text-label-sm text-error block">88.5% Occupied</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Active Zones</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">8 Zones</span>
+<span class="font-label-sm text-label-sm text-secondary block">Rack A-D, Bay 01-04</span>
+</div>
+</div>
+<!-- Fleet & Personnel Indicators -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">rv_hookup</span>
+                  6 Loading Docks (4 Active Now)
+                </span>
+<span class="font-mono-data text-label-sm text-on-surface">12 Forklifts</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+                  Lead: Rajesh Sharma
+                </span>
+<span class="font-mono-data text-label-sm text-primary font-semibold">₹28.4 Cr SKUs</span>
+</div>
+</div>
+</div>
+<!-- Capacity Bar & Action Buttons -->
+<div class="p-space-lg pt-space-sm">
+<div class="w-full bg-surface-container h-1 rounded-full mb-space-md overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88.5%"></div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 bg-surface-container-low text-primary hover:bg-surface-container font-label-md text-label-md py-1.5 rounded transition-colors text-center cursor-pointer">
+                Manage Zones &amp; Bins
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="View Ledger">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="Edit Config">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: WH02 Production Warehouse -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div class="p-space-lg pb-0">
+<div class="relative h-40 -mx-space-lg -mt-space-lg mb-space-md overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Industrial manufacturing and raw materials warehouse facility with overhead crane gantries, neatly stacked metal alloy pallets, engineering parts staging racks, and industrial lighting in neutral slate blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwM_hmc48OugpkP-OODWvajyqZJIgAeibozMR049WaY9aFRrBsYzT6TY0uZbX9JFElnRhYc5xukGEoKaNd4X2ZoS91AUFSLcSmMU4BO3nQwjAOHv3-vgFRCdhm3vnn-KYPrAIRgf9gEHIjr8L5KXpG8KpLU_AGbRoHx_oiTsMPL-aMidLgdAsJzMwOMzjhLaBSoNKLY2gQynxXDPqlLkJI8wABDUwA1iK7c1P--Zv3do-AhoDCfqhl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/30"></div>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="bg-inverse-surface/90 backdrop-blur-sm text-on-primary font-mono-data text-label-sm px-2 py-0.5 rounded">WH02</span>
+<span class="inline-flex items-center gap-1.5 bg-secondary text-on-secondary font-label-sm text-label-sm px-2 py-0.5 rounded shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-lowest"></span> Manufacturing Node
+                </span>
+</div>
+<div class="absolute top-space-md right-space-md bg-surface-container-lowest/95 backdrop-blur-sm px-2 py-1 rounded text-on-surface font-mono-data text-label-sm shadow-sm">
+                SLA 98.8%
+              </div>
+<div class="absolute bottom-space-xs left-space-md right-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Raw Materials &amp; Assembly Staging</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Production Warehouse</h3>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pb-space-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="truncate">Bommasandra Industrial Hub, Plot 14, Bengaluru</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm py-space-sm bg-surface-container-low/60 rounded-lg px-space-md my-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Storage Space</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">45,000 sq.ft</span>
+<span class="font-label-sm text-label-sm text-primary block">76.2% Utilized</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Active Zones</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">6 Zones</span>
+<span class="font-label-sm text-label-sm text-secondary block">Yard B, Ingot, Bay 03</span>
+</div>
+</div>
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">rv_hookup</span>
+                  4 Loading Docks (2 Active)
+                </span>
+<span class="font-mono-data text-label-sm text-on-surface">8 Cranes / Forklifts</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+                  Lead: Suresh Hegde
+                </span>
+<span class="font-mono-data text-label-sm text-primary font-semibold">₹14.2 Cr SKUs</span>
+</div>
+</div>
+</div>
+<div class="p-space-lg pt-space-sm">
+<div class="w-full bg-surface-container h-1 rounded-full mb-space-md overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 76.2%"></div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 bg-surface-container-low text-primary hover:bg-surface-container font-label-md text-label-md py-1.5 rounded transition-colors text-center cursor-pointer">
+                Manage Zones &amp; Bins
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="View Ledger">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="Edit Config">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 3: WH03 Regional Spoke & Transit Hub -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div class="p-space-lg pb-0">
+<div class="relative h-40 -mx-space-lg -mt-space-lg mb-space-md overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Active commercial freight transit and cross-docking logistics depot with roll-up shutter doors, delivery trucks parked at bay, packages conveyor systems, and logistics freight pallets." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5kVGoR2acG-k2vJjhqycdeZ1QLk37jHPndZ4yobGg4F8YkFz7BizgTmJvMvkcLTKa-X3eDZX2Nou6PrIAGY3Q5RqjV6esc6Sq8cZPGonAnspKsMcoPQlooi_cPu4wVjkRTlOfjmuf3YXcqi0cbTsVbFs0TQ20xlfnW8SKomqcueQ68I1bfkwo75hVKUxGtgQ8cp9Zhyi0zOaU4KtNji0_r0gBL8MiKlBUvZ9SB3YQN2SX_moko2og"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/30"></div>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="bg-inverse-surface/90 backdrop-blur-sm text-on-primary font-mono-data text-label-sm px-2 py-0.5 rounded">WH03</span>
+<span class="inline-flex items-center gap-1.5 bg-tertiary text-on-tertiary font-label-sm text-label-sm px-2 py-0.5 rounded shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-lowest"></span> Regional Spoke
+                </span>
+</div>
+<div class="absolute top-space-md right-space-md bg-surface-container-lowest/95 backdrop-blur-sm px-2 py-1 rounded text-on-surface font-mono-data text-label-sm shadow-sm">
+                SLA 99.1%
+              </div>
+<div class="absolute bottom-space-xs left-space-md right-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Cross-dock &amp; Last-Mile Relay</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Regional Spoke Transit Hub</h3>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pb-space-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="truncate">Bhiwandi Logistics Corridor, NH48, Mumbai, MH</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm py-space-sm bg-surface-container-low/60 rounded-lg px-space-md my-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Storage Space</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">32,500 sq.ft</span>
+<span class="font-label-sm text-label-sm text-tertiary block">81.0% Utilized</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block">Active Zones</span>
+<span class="font-mono-data text-body-md text-on-surface font-semibold">5 Zones</span>
+<span class="font-label-sm text-label-sm text-secondary block">Cross-Dock, Rapid Sort</span>
+</div>
+</div>
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">rv_hookup</span>
+                  8 Express Docks (All Open)
+                </span>
+<span class="font-mono-data text-label-sm text-on-surface">6 Reach Trucks</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+                  Lead: Manish Kulkarni
+                </span>
+<span class="font-mono-data text-label-sm text-primary font-semibold">₹9.8 Cr SKUs</span>
+</div>
+</div>
+</div>
+<div class="p-space-lg pt-space-sm">
+<div class="w-full bg-surface-container h-1 rounded-full mb-space-md overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 81.0%"></div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 bg-surface-container-low text-primary hover:bg-surface-container font-label-md text-label-md py-1.5 rounded transition-colors text-center cursor-pointer">
+                Manage Zones &amp; Bins
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="View Ledger">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low text-on-surface hover:bg-surface-container font-label-md text-label-md cursor-pointer" title="Edit Config">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed High-Density Enterprise Warehouse Directory Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden space-y-space-md p-space-lg">
+<!-- Table Filters & Omni Bar -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">All Warehouse Facilities Directory</h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low font-mono-data text-label-sm text-primary">5 Facilities Total</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Complete operational ledger, zone partitions, inventory asset capitalization, and facility governance.</p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[16px]">filter_list</span>
+<input class="h-8 pl-8 pr-3 text-body-sm font-body-sm bg-surface-container-low rounded text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary w-48 lg:w-64" id="facility-search-input" placeholder="Filter sites, city, head..." type="text"/>
+</div>
+<select class="h-8 px-2.5 bg-surface-container-low text-on-surface rounded font-label-md text-label-md outline-none cursor-pointer">
+<option>All Types</option>
+<option>Fulfillment</option>
+<option>Manufacturing</option>
+<option>Cold Storage</option>
+<option>Transit Hub</option>
+</select>
+<button class="h-8 px-3 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">tune</span> Columns
+          </button>
+</div>
+</div>
+<!-- Data Grid Table -->
+<div class="overflow-x-auto -mx-space-lg">
+<table class="w-full text-left border-collapse min-w-[1050px]">
+<thead>
+<tr class="bg-surface-container-low/80 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-2.5 px-space-lg font-semibold w-24">Code</th>
+<th class="py-2.5 px-space-md font-semibold">Warehouse Name &amp; Address</th>
+<th class="py-2.5 px-space-md font-semibold">Type</th>
+<th class="py-2.5 px-space-md font-semibold text-right">Floor Area</th>
+<th class="py-2.5 px-space-md font-semibold w-48">Volumetric Utilization</th>
+<th class="py-2.5 px-space-md font-semibold text-right">Total SKUs</th>
+<th class="py-2.5 px-space-md font-semibold text-right">Inventory Valuation</th>
+<th class="py-2.5 px-space-md font-semibold">Facility Head</th>
+<th class="py-2.5 px-space-md font-semibold">Status</th>
+<th class="py-2.5 px-space-lg font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm text-on-surface">
+<!-- ROW 1: WH01 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-3 px-space-lg font-mono-data text-primary font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>WH01</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="font-headline-sm text-[13px] text-on-surface font-semibold">Main Fulfillment Center</div>
+<div class="text-on-surface-variant font-body-sm text-[11px] truncate max-w-xs">Peenya 2nd Stage, Bengaluru, KA - 560058</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Central Fulfillment</span>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right">65,000 sq.ft</td>
+<td class="py-3 px-space-md">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-data text-[11px]">
+<span class="font-semibold text-on-surface">88.5%</span>
+<span class="text-error font-medium">Near Capacity</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88.5%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right font-medium">14,820</td>
+<td class="py-3 px-space-md font-mono-data text-right text-primary font-semibold">₹28.40 Cr</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-mono-data text-[10px] text-on-surface font-bold">RS</div>
+<span class="truncate font-medium">Rajesh Sharma</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Operational
+                </span>
+</td>
+<td class="py-3 px-space-lg text-right">
+<div class="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer" title="Manage Zones">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer" title="Audit Log">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer" title="Facility Options">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: WH02 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-3 px-space-lg font-mono-data text-primary font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>WH02</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="font-headline-sm text-[13px] text-on-surface font-semibold">Production Warehouse</div>
+<div class="text-on-surface-variant font-body-sm text-[11px] truncate max-w-xs">Bommasandra Ind Area, Hosur Rd, Bengaluru, KA - 560099</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Raw Materials Staging</span>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right">45,000 sq.ft</td>
+<td class="py-3 px-space-md">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-data text-[11px]">
+<span class="font-semibold text-on-surface">76.2%</span>
+<span class="text-secondary font-medium">Optimal</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 76.2%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right font-medium">6,490</td>
+<td class="py-3 px-space-md font-mono-data text-right text-primary font-semibold">₹14.20 Cr</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-mono-data text-[10px] text-on-surface font-bold">SH</div>
+<span class="truncate font-medium">Suresh Hegde</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Operational
+                </span>
+</td>
+<td class="py-3 px-space-lg text-right">
+<div class="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: WH03 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-3 px-space-lg font-mono-data text-primary font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>WH03</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="font-headline-sm text-[13px] text-on-surface font-semibold">Regional Spoke Transit Hub</div>
+<div class="text-on-surface-variant font-body-sm text-[11px] truncate max-w-xs">Bhiwandi Warehousing Sector, Thane, MH - 421302</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Cross-dock &amp; Spoke</span>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right">32,500 sq.ft</td>
+<td class="py-3 px-space-md">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-data text-[11px]">
+<span class="font-semibold text-on-surface">81.0%</span>
+<span class="text-tertiary font-medium">Flow Controlled</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 81%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right font-medium">8,120</td>
+<td class="py-3 px-space-md font-mono-data text-right text-primary font-semibold">₹9.80 Cr</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-mono-data text-[10px] text-on-surface font-bold">MK</div>
+<span class="truncate font-medium">Manish Kulkarni</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Operational
+                </span>
+</td>
+<td class="py-3 px-space-lg text-right">
+<div class="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: WH04 Cold Hub -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-3 px-space-lg font-mono-data text-primary font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>WH04</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="font-headline-sm text-[13px] text-on-surface font-semibold">Pharma &amp; Cold Chain Hub</div>
+<div class="text-on-surface-variant font-body-sm text-[11px] truncate max-w-xs">Genome Valley, Shamirpet, Hyderabad, TG - 500078</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Temperature Controlled (-20°C to +4°C)</span>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right">18,000 sq.ft</td>
+<td class="py-3 px-space-md">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-data text-[11px]">
+<span class="font-semibold text-on-surface">91.2%</span>
+<span class="text-error font-medium">Critical Threshold</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 91.2%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right font-medium">2,340</td>
+<td class="py-3 px-space-md font-mono-data text-right text-primary font-semibold">₹19.65 Cr</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-mono-data text-[10px] text-on-surface font-bold">AR</div>
+<span class="truncate font-medium">Ananya Rao</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Operational
+                </span>
+</td>
+<td class="py-3 px-space-lg text-right">
+<div class="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5: WH05 Transit Depot -->
+<tr class="hover:bg-surface-container-low/40 transition-colors group">
+<td class="py-3 px-space-lg font-mono-data text-primary font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>WH05</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="font-headline-sm text-[13px] text-on-surface font-semibold">Northern Transit Depot</div>
+<div class="text-on-surface-variant font-body-sm text-[11px] truncate max-w-xs">Kundli Logistics Park, Sonipat, NCR - 131028</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">Transit &amp; Fast Staging</span>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right">12,000 sq.ft</td>
+<td class="py-3 px-space-md">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-data text-[11px]">
+<span class="font-semibold text-on-surface">68.4%</span>
+<span class="text-secondary font-medium">Headroom Avail</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 68.4%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-mono-data text-right font-medium">3,980</td>
+<td class="py-3 px-space-md font-mono-data text-right text-primary font-semibold">₹6.15 Cr</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center font-mono-data text-[10px] text-on-surface font-bold">VK</div>
+<span class="truncate font-medium">Vikram Khanna</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Operational
+                </span>
+</td>
+<td class="py-3 px-space-lg text-right">
+<div class="flex items-center justify-end gap-1 opacity-80 group-hover:opacity-100">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Aggregate Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+          Showing <span class="font-medium text-on-surface">1 - 5</span> of 5 Active Warehouse Entities • Total Portfolio: <span class="font-mono-data font-semibold text-primary">₹78.20 Crores Inventory</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded bg-surface-container-low text-outline cursor-not-allowed">Previous</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded bg-primary-container text-on-primary font-semibold">1</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded bg-surface-container-low text-outline cursor-not-allowed">Next</button>
+</div>
+</div>
+</div>
+<!-- Operating Parameters & Facility Protocols Drawer / Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-tertiary">speed</span>
+<h4 class="font-headline-sm text-headline-sm">Dock &amp; Turnaround Rules</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Active parameters governing inbound unloading and outbound staging turnaround across hubs.</p>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">Max Inbound Dock Dwell</span>
+<span class="font-mono-data font-semibold text-on-surface">45 Minutes</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">Cross-dock Transit Target</span>
+<span class="font-mono-data font-semibold text-on-surface">120 Minutes</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Pallet Barcode Validation</span>
+<span class="font-mono-data text-primary font-semibold">Strict 2D Matrix</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-secondary">security</span>
+<h4 class="font-headline-sm text-headline-sm">Security &amp; Surveillance</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automated biometric gates, RFID gate antennas, and volumetric AI camera sensors.</p>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">Connected Gate Cameras</span>
+<span class="font-mono-data font-semibold text-on-surface">42 Units (100% On)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">High-Value Cage Security</span>
+<span class="font-mono-data font-semibold text-on-surface">Dual Keycard Req.</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Night Roster Guard Sync</span>
+<span class="font-mono-data text-primary font-semibold">Geo-Fenced Beacon</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-tertiary">thermostat</span>
+<h4 class="font-headline-sm text-headline-sm">Environmental &amp; Cold Chain</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">IoT ambient probes tracking humidity and chilling zones at WH04 and WH01.</p>
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">WH04 Deep Freeze Zone</span>
+<span class="font-mono-data font-semibold text-tertiary">-19.2°C (Norm)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-low">
+<span class="text-on-surface-variant">Ambient Racks Humidity</span>
+<span class="font-mono-data font-semibold text-on-surface">48% RH Optimal</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Telemetry Backup Power</span>
+<span class="font-mono-data text-primary font-semibold">120kVA Online UPS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide-Over Drawer: Add / Configure Warehouse Facility Form (Modal) -->
+<div class="fixed inset-0 z-50 hidden" id="facility-modal">
+<!-- Scrim -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm transition-opacity" id="modal-backdrop"></div>
+<!-- Slide-over Drawer -->
+<div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+<div class="w-screen max-w-xl bg-surface-container-lowest shadow-2xl flex flex-col justify-between">
+<!-- Drawer Header -->
+<div class="px-space-xl py-space-lg bg-surface-container-low flex items-center justify-between">
+<div class="space-y-0.5">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Topology Setup</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Add New Warehouse Node</h3>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors" id="close-modal-btn">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<!-- Drawer Form Body -->
+<div class="px-space-xl py-space-lg overflow-y-auto space-y-space-lg flex-1">
+<div class="p-space-md rounded bg-surface-container-low/70 flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Registering a facility automatically provisions ERP routing codes, initializes bin address schemes, and allocates default dispatch docks.
+            </p>
+</div>
+<form class="space-y-space-md" id="new-facility-form" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-2 gap-space-md">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Facility Code</label>
+<input class="w-full h-9 px-3 bg-surface-container font-mono-data text-body-sm rounded text-on-surface-variant outline-none cursor-not-allowed" readonly="" type="text" value="WH06"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Node Type *</label>
+<select class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary">
+<option>Central Fulfillment &amp; Storage</option>
+<option>Regional Cross-Dock Spoke</option>
+<option>Manufacturing Assembly Staging</option>
+<option>Cold Chain / Chilled Depot</option>
+<option>Buffer Transit Stockyard</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Warehouse Entity Name *</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded placeholder:text-outline outline-none focus:ring-1 focus:ring-primary" placeholder="e.g. Chennai Gateway Logistics Depot" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Physical Postal Address &amp; Sector *</label>
+<textarea class="w-full p-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded placeholder:text-outline outline-none focus:ring-1 focus:ring-primary" placeholder="Street, industrial estate, landmark..." rows="2"></textarea>
+</div>
+<div class="grid grid-cols-3 gap-space-sm">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">City / Hub</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary" placeholder="Chennai" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">State</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary" placeholder="Tamil Nadu" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">PIN Code</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary" placeholder="600001" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md pt-space-xs">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Total Floor Area (Sq. Ft) *</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-mono-data text-body-sm rounded outline-none focus:ring-1 focus:ring-primary" placeholder="25000" type="number"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Number of Loading Bays</label>
+<input class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-mono-data text-body-sm rounded outline-none focus:ring-1 focus:ring-primary" placeholder="4" type="number"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Assigned Facility Lead *</label>
+<select class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary">
+<option>Rajesh Sharma (Sr. Ops Mgr)</option>
+<option>Suresh Hegde (Plant Lead)</option>
+<option>Manish Kulkarni (Hub Lead)</option>
+<option>Ananya Rao (Cold Ops Lead)</option>
+<option>Vikram Khanna (Logistics Sup)</option>
+<option>Assign New Regional Lead...</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Primary Network Link</label>
+<select class="w-full h-9 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:ring-1 focus:ring-primary">
+<option>Inter-hub to WH01 (Bengaluru)</option>
+<option>Inter-hub to WH03 (Mumbai)</option>
+<option>Independent Node</option>
+</select>
+</div>
+</div>
+<!-- Pre-Provision Default Zones Checkbox Group -->
+<div class="pt-space-xs space-y-2">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold block">Auto-Provision Storage Architecture</span>
+<div class="grid grid-cols-2 gap-2 text-on-surface font-body-sm text-body-sm">
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Inbound Staging Bay</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>High-Rack Aisle 01-04</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Dispatch Marshalling</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-surface-container-low cursor-pointer">
+<input class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Quarantine / RMA Cage</span>
+</label>
+</div>
+</div>
+</form>
+</div>
+<!-- Drawer Footer Buttons -->
+<div class="px-space-xl py-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="h-9 px-space-lg rounded text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors cursor-pointer" id="cancel-modal-btn">
+            Cancel
+          </button>
+<button class="h-9 px-space-xl rounded bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md shadow-sm transition-all cursor-pointer" id="save-facility-btn">
+            Save &amp; Initialize Facility
+          </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Micro-interactions and interactive toggle behaviors
+    document.addEventListener('DOMContentLoaded', () => {
+      // Map view toggle
+      const mapBtn = document.getElementById('toggle-map-btn');
+      const mapPanel = document.getElementById('network-map-panel');
+      const closeMapBtn = document.getElementById('close-map-btn');
+
+      if (mapBtn && mapPanel) {
+        mapBtn.addEventListener('click', () => {
+          mapPanel.classList.toggle('hidden');
+          if (!mapPanel.classList.contains('hidden')) {
+            mapPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      }
+
+      if (closeMapBtn && mapPanel) {
+        closeMapBtn.addEventListener('click', () => {
+          mapPanel.classList.add('hidden');
+        });
+      }
+
+      // Add Warehouse Slide-over Drawer
+      const openModalBtn = document.getElementById('open-add-modal-btn');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const cancelModalBtn = document.getElementById('cancel-modal-btn');
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const modal = document.getElementById('facility-modal');
+      const saveBtn = document.getElementById('save-facility-btn');
+
+      const openModal = () => modal && modal.classList.remove('hidden');
+      const closeModal = () => modal && modal.classList.add('hidden');
+
+      if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+      if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+      if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+      if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+      if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+          saveBtn.innerText = 'Initializing Mesh...';
+          setTimeout(() => {
+            saveBtn.innerText = 'Facility Active!';
+            setTimeout(() => {
+              closeModal();
+              saveBtn.innerText = 'Save & Initialize Facility';
+            }, 600);
+          }, 700);
+        });
+      }
+
+      // Simple Table Filter Filter Input
+      const searchInput = document.getElementById('facility-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const val = e.target.value.toLowerCase();
+          const rows = document.querySelectorAll('tbody tr');
+          rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(val) ? '' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</div></main></div></body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed": "#131b2e", "primary-fixed": "#dbe1ff", "secondary-fixed-dim": "#bec6e0", "on-error": "#ffffff", "error": "#ba1a1a", "on-primary-container": "#eeefff", "on-secondary-fixed-variant": "#3f465c", "on-surface-variant": "#434655", "on-primary-fixed": "#00174b", "on-tertiary-fixed-variant": "#004395", "on-primary-fixed-variant": "#003ea8", "surface-dim": "#cbdbf5", "surface-variant": "#d3e4fe", "secondary-fixed": "#dae2fd", "tertiary": "#0051b1", "surface-container": "#e5eeff", "on-secondary": "#ffffff", "inverse-surface": "#213145", "outline-variant": "#c3c6d7", "surface-tint": "#0053db", "on-surface": "#0b1c30", "on-tertiary": "#ffffff", "on-tertiary-fixed": "#001a42", "tertiary-container": "#0f69dc", "secondary-container": "#dae2fd", "surface-container-low": "#eff4ff", "on-tertiary-container": "#edf0ff", "surface-container-high": "#dce9ff", "surface": "#f8f9ff", "tertiary-fixed": "#d8e2ff", "outline": "#737686", "secondary": "#565e74", "primary-fixed-dim": "#b4c5ff", "inverse-primary": "#b4c5ff", "error-container": "#ffdad6", "on-primary": "#ffffff", "primary-container": "#2563eb", "primary": "#004ac6", "on-secondary-container": "#5c647a", "surface-bright": "#f8f9ff", "inverse-on-surface": "#eaf1ff", "tertiary-fixed-dim": "#adc6ff", "surface-container-highest": "#d3e4fe", "on-background": "#0b1c30", "surface-container-lowest": "#ffffff", "background": "#f8f9ff", "on-error-container": "#93000a" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "margin": "1.5rem", "space-2xl": "2rem", "space-sm": "0.5rem", "gutter-dense": "0.5rem", "margin-mobile": "0.75rem", "gutter": "1rem", "space-md": "0.75rem", "space-lg": "1rem", "space-xs": "0.25rem", "space-xl": "1.5rem" }, "fontFamily": { "display-lg": [ "Geist" ], "mono-data": [ "Inter" ], "label-sm": [ "Inter" ], "body-sm": [ "Inter" ], "headline-lg": [ "Geist" ], "body-lg": [ "Inter" ], "headline-md": [ "Geist" ], "headline-sm": [ "Geist" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ] }, "fontSize": { "display-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "mono-data": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "body-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #2563eb
+- Font: geist
+- Mode: light
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WbXOn_0XAbDQlhGHI1r3BukZWC2zTmbZRbs9EPOd5Mhhw-WhwlpU8e2Ls0RaVSqmip2yWYus3Zg13s-QMm1J2AlSVi6B8IpaHWT2Omnijid8shhj9ZmojksHA7C_t3DpOUDzgG-vxX3ZynxfSoWfOf_Tc3SzueeD4e9Qz3Z959Rm-5zlGWm7mO9H0WrntKD0fbusKGKqNBcevr3JcAR_AggaaxOnMOA6kjC-TBs9ANXQ5uO6eOGutBwn8"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">StockSense</span><span class="hidden sm:inline-flex items-center px-space-xs py-0.5 rounded-DEFAULT bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Enterprise WMS</span></div><div class="flex items-center gap-space-lg"><nav class="flex items-center gap-space-lg" data-active-classes="text-on-surface font-semibold"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="login" href="#">Sign In</a><a aria-current="page" class="transition-colors text-on-surface font-semibold" data-path="sign-up" href="#">Register</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="system-status" href="#">Status</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="documentation-help" href="#">Support</a></nav><div class="h-4 w-px bg-outline-variant hidden sm:block"></div><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">language</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">EN-US</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 flex-1 flex flex-col items-center justify-center bg-surface relative"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-margin py-space-xl lg:py-space-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Informational Side Panel -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-20">
+<!-- Header / Subtitle Section -->
+<div class="flex flex-col gap-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-secondary-container/50 text-on-secondary-container w-fit">
+<span class="material-symbols-outlined text-[16px] text-primary">hub</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Tier-1 Onboarding Node</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold mt-space-xs">
+            Deploy StockSense for Your Warehouse Network
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Provision dedicated cryptographic ledger instances for cross-docking facilities, bonded distribution centers, and automated high-bay fulfillment hubs.
+          </p>
+</div>
+<!-- Metric Pulse Cards -->
+<div class="grid grid-cols-2 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">Sync SLA</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">bolt</span>
+</div>
+<div class="mt-space-sm">
+<div class="font-headline-md text-headline-md font-semibold text-on-surface font-display-lg">&lt; 14ms</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Real-time scan latency</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-semibold">Ledger Fidelity</span>
+<span class="material-symbols-outlined text-[18px] text-primary">lock_clock</span>
+</div>
+<div class="mt-space-sm">
+<div class="font-headline-md text-headline-md font-semibold text-on-surface font-display-lg">99.998%</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Immutable audit proof</p>
+</div>
+</div>
+</div>
+<!-- Architectural Value Props -->
+<div class="flex flex-col gap-space-sm">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Instant Double-Entry Ledger Setup</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Every movement generates immutable debit-credit stock rows. Eliminates phantom shrinkage and perpetual inventory blindspots.
+              </p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[22px]">grid_goldenratio</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Multi-zone Bin Hierarchy Configuration</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Model complex multi-level mezzanine racks, cold-chain blast freezers, and transit aprons with coordinate-precise spatial mapping.
+              </p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[22px]">local_shipping</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Real-time ERP &amp; E-Way Bill Integration</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Direct connectors for SAP S/4HANA, Oracle Netsuite, and automated NIC E-Way compliance generation upon dispatch manifest locking.
+              </p>
+</div>
+</div>
+</div>
+<!-- Facility Visual Micro-Banner -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high h-44 shadow-sm flex flex-col justify-end p-space-md">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Expansive modern automated distribution center with intelligent automated guided vehicles, precision rack lighting, high ceiling structural truss, blue accent LED status light indicators, ultra-clean logistics architectural photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBU4re_r5hoWr0Dr5xgI-ZvjZJjgGFOJBLNMmEWC5mPgIw0slSiurw7FOv6BSNOtNf_NPuoRp5SkNebiNYyxgU20ixebTgSMCow2NxtZlPNnaNVgoU0mlKYosuxE_-LQV4McKwEHPwlTXPW6snzYtw44yJHV0AEnc5QWEIre2EFK65sATr6kP4hr3DAleJKSLrEbV8BwhQGlwhbAc8EzvS1TjlzM2GdTce-IConealhhA9WByqqFWN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant font-semibold">Active Fleet Network</span>
+<span class="font-body-sm text-body-sm text-surface font-medium">Bhiwandi Hub 04 • Zone D Verified</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface/20 backdrop-blur-md text-surface font-mono-data text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              NODE ONLINE
+            </span>
+</div>
+</div>
+<!-- Quote / Compliance Endorsement -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary text-[28px]">verified</span>
+<div class="flex flex-col">
+<p class="font-body-sm text-body-sm text-on-surface font-medium leading-snug">
+              "We migrated 42 distribution depots within 48 hours without halting dispatch cycles."
+            </p>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">VP Supply Chain, Premier Logistics Corp</span>
+</div>
+</div>
+</div>
+<!-- Registration Form Card -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg sm:p-space-xl rounded-xl shadow-md flex flex-col gap-space-lg">
+<!-- Form Header -->
+<div class="flex flex-col gap-space-xs pb-space-xs">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">
+              Create your StockSense Workspace
+            </h2>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded bg-surface-container text-primary font-semibold uppercase">
+              Step 1 of 2
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Start streamlining inventory, inbound receipts, and dispatches across all your facilities.
+          </p>
+</div>
+<form class="flex flex-col gap-space-lg" id="enterprise-reg-form" onsubmit="event.preventDefault();">
+<!-- Name Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="first-name">First Name</label>
+<div class="relative flex items-center">
+<input class="w-full h-[38px] px-space-md rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="first-name" name="first-name" placeholder="e.g. Rajesh" required="" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="last-name">Last Name</label>
+<div class="relative flex items-center">
+<input class="w-full h-[38px] px-space-md rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="last-name" name="last-name" placeholder="e.g. Sharma" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Contact Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium flex items-center justify-between" for="work-email">
+<span>Corporate Work Email</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm font-normal">Domain-checked</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">mail</span>
+<input class="w-full h-[38px] pl-10 pr-space-md rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="work-email" name="work-email" placeholder="rajesh@acmelogistics.com" required="" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="phone-number">Phone Number</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">call</span>
+<input class="w-full h-[38px] pl-10 pr-space-md rounded bg-surface-container-lowest text-on-surface font-mono-data text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="phone-number" name="phone-number" placeholder="+91 98452 11094" required="" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Company Row -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="company-name">Company / Organization Legal Entity</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">domain</span>
+<input class="w-full h-[38px] pl-10 pr-space-md rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="company-name" name="company-name" placeholder="e.g. Acme Logistics India Pvt Ltd" required="" type="text"/>
+</div>
+</div>
+<!-- Dropdowns Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="facility-type">Primary Facility Type</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">warehouse</span>
+<select class="w-full h-[38px] pl-10 pr-8 rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors appearance-none cursor-pointer shadow-sm" id="facility-type" name="facility-type">
+<option value="central_hub">Central Fulfillment Hub</option>
+<option value="manufacturing">Manufacturing Warehouse</option>
+<option value="cross_dock">3PL / Cross-Dock Transit</option>
+<option value="cold_chain">Cold Chain Storage</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 pointer-events-none text-on-surface-variant text-[18px]">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="sku-volume">Expected SKU Volume</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">layers</span>
+<select class="w-full h-[38px] pl-10 pr-8 rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:bg-surface-container-low focus:outline-none transition-colors appearance-none cursor-pointer shadow-sm" id="sku-volume" name="sku-volume">
+<option value="under_1k">Under 1,000 SKUs</option>
+<option selected="" value="1k_to_10k">1,000 - 10,000 SKUs</option>
+<option value="enterprise_10k">10,000+ Enterprise SKUs</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 pointer-events-none text-on-surface-variant text-[18px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Passwords & Security Checklist -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Password Input -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="password">Workspace Master Password</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">key</span>
+<input class="w-full h-[38px] pl-10 pr-10 rounded bg-surface-container-lowest text-on-surface font-mono-data text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="password" name="password" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-2 text-on-surface-variant hover:text-on-surface p-1 flex items-center" id="toggle-pw-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="confirm-password">Confirm Password</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">check_circle</span>
+<input class="w-full h-[38px] pl-10 pr-10 rounded bg-surface-container-lowest text-on-surface font-mono-data text-body-md focus:bg-surface-container-low focus:outline-none transition-colors shadow-sm" id="confirm-password" name="confirm-password" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-2 text-on-surface-variant hover:text-on-surface p-1 flex items-center" id="toggle-confirm-pw-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Live Security Checklist Pills -->
+<div class="pt-space-xs flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Password Requirements</span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors shadow-sm" id="rule-length">
+<span class="material-symbols-outlined text-[14px] text-outline-variant">radio_button_unchecked</span>
+<span>At least 10 chars</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors shadow-sm" id="rule-uppercase">
+<span class="material-symbols-outlined text-[14px] text-outline-variant">radio_button_unchecked</span>
+<span>One uppercase</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors shadow-sm" id="rule-symbol-num">
+<span class="material-symbols-outlined text-[14px] text-outline-variant">radio_button_unchecked</span>
+<span>One symbol &amp; number</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors shadow-sm" id="rule-match">
+<span class="material-symbols-outlined text-[14px] text-outline-variant">radio_button_unchecked</span>
+<span>Passwords match</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-space-sm pt-1">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer shrink-0" id="msa-terms" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant select-none cursor-pointer" for="msa-terms">
+              I agree to the <a class="text-primary hover:underline font-medium" data-path="documentation-help" href="#">StockSense Master Service Agreement</a>, <a class="text-primary hover:underline font-medium" data-path="documentation-help" href="#">Warehouse Data Governance Policy</a>, and <a class="text-primary hover:underline font-medium" data-path="documentation-help" href="#">ISO 27001 Security Protocols</a>.
+            </label>
+</div>
+<!-- Action CTA & Sub-actions -->
+<div class="flex flex-col gap-space-md pt-space-xs">
+<button class="w-full h-11 px-space-lg rounded-lg bg-primary hover:bg-tertiary-container text-on-primary font-headline-sm text-headline-sm font-medium transition-colors shadow-sm flex items-center justify-center gap-space-xs group" id="submit-register-btn" type="submit">
+<span>Create Enterprise Account &amp; Proceed to Verification</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-xs pt-space-xs">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+                Already have an enterprise account? 
+                <a class="text-primary hover:underline font-semibold ml-1" data-path="login" href="#">Sign In</a>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">support_agent</span>
+<a class="hover:text-on-surface transition-colors" data-path="documentation-help" href="#">Talk to Deployment Architect</a>
+</div>
+</div>
+</div>
+</form>
+<!-- Security Ledger Notice -->
+<div class="mt-space-xs pt-space-md bg-surface-container-low/60 rounded-lg p-space-md flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center shrink-0 text-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">enhanced_encryption</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            All data is encrypted in transit and at rest using AES-256 and SHA-256 ledger chaining. Enterprise instances maintain zero-knowledge isolation per tenant partition.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const pwInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirm-password');
+    const togglePw = document.getElementById('toggle-pw-btn');
+    const toggleConfirmPw = document.getElementById('toggle-confirm-pw-btn');
+
+    const ruleLength = document.getElementById('rule-length');
+    const ruleUppercase = document.getElementById('rule-uppercase');
+    const ruleSymbolNum = document.getElementById('rule-symbol-num');
+    const ruleMatch = document.getElementById('rule-match');
+
+    function updatePill(el, valid) {
+      const icon = el.querySelector('.material-symbols-outlined');
+      if (valid) {
+        el.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+        el.classList.add('bg-emerald-50', 'text-emerald-700');
+        icon.textContent = 'check_circle';
+        icon.classList.remove('text-outline-variant');
+        icon.classList.add('text-emerald-600');
+      } else {
+        el.classList.remove('bg-emerald-50', 'text-emerald-700');
+        el.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+        icon.textContent = 'radio_button_unchecked';
+        icon.classList.remove('text-emerald-600');
+        icon.classList.add('text-outline-variant');
+      }
+    }
+
+    function checkPasswordStrength() {
+      const val = pwInput.value;
+      const confirmVal = confirmInput.value;
+
+      const hasLength = val.length >= 10;
+      const hasUpper = /[A-Z]/.test(val);
+      const hasSymbolOrNum = /[\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(val);
+      const doesMatch = val.length > 0 && val === confirmVal;
+
+      updatePill(ruleLength, hasLength);
+      updatePill(ruleUppercase, hasUpper);
+      updatePill(ruleSymbolNum, hasSymbolOrNum);
+      updatePill(ruleMatch, doesMatch);
+    }
+
+    pwInput.addEventListener('input', checkPasswordStrength);
+    confirmInput.addEventListener('input', checkPasswordStrength);
+
+    togglePw.addEventListener('click', function() {
+      const isPassword = pwInput.getAttribute('type') === 'password';
+      pwInput.setAttribute('type', isPassword ? 'text' : 'password');
+      this.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+    });
+
+    toggleConfirmPw.addEventListener('click', function() {
+      const isPassword = confirmInput.getAttribute('type') === 'password';
+      confirmInput.setAttribute('type', isPassword ? 'text' : 'password');
+      this.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.02)] z-10"><div class="w-full px-margin py-space-md flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center flex-wrap gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[16px]">verified_user</span><span class="font-label-sm text-label-sm font-semibold tracking-wide">SOC2 TYPE II</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[16px]">security</span><span class="font-label-sm text-label-sm font-semibold tracking-wide">ISO 27001</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[16px]">lock</span><span class="font-label-sm text-label-sm font-semibold tracking-wide">256-BIT TLS ENCRYPTION</span></div></div><div class="flex items-center gap-space-lg text-on-surface-variant font-body-sm text-body-sm"><a class="hover:text-on-surface transition-colors" data-path="documentation-help" href="#">Security Whitepaper</a><a class="hover:text-on-surface transition-colors" data-path="documentation-help" href="#">Privacy Policy</a><span class="text-outline-variant">•</span><span>© 2025 StockSense Logistics Technologies Inc.</span></div></div></footer></body></html>
