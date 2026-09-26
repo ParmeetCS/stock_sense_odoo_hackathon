@@ -27,6 +27,9 @@ const StockList = lazy(() => import('../pages/stock/StockList').then((m) => ({ d
 const ReceiptList = lazy(() => import('../pages/operations/receipts/ReceiptList').then((m) => ({ default: m.ReceiptList })));
 const ReceiptCreate = lazy(() => import('../pages/operations/receipts/ReceiptCreate').then((m) => ({ default: m.ReceiptCreate })));
 const ReceiptDetail = lazy(() => import('../pages/operations/receipts/ReceiptDetail').then((m) => ({ default: m.ReceiptDetail })));
+const DeliveryList = lazy(() => import('../pages/operations/deliveries/DeliveryList').then((m) => ({ default: m.DeliveryList })));
+const DeliveryCreate = lazy(() => import('../pages/operations/deliveries/DeliveryCreate').then((m) => ({ default: m.DeliveryCreate })));
+const DeliveryDetail = lazy(() => import('../pages/operations/deliveries/DeliveryDetail').then((m) => ({ default: m.DeliveryDetail })));
 const TransferList = lazy(() => import('../pages/operations/transfers/TransferList').then((m) => ({ default: m.TransferList })));
 const TransferCreate = lazy(() => import('../pages/operations/transfers/TransferCreate').then((m) => ({ default: m.TransferCreate })));
 const TransferDetail = lazy(() => import('../pages/operations/transfers/TransferDetail').then((m) => ({ default: m.TransferDetail })));
@@ -99,15 +102,15 @@ const router = createBrowserRouter([
               /* Deliveries */
               {
                 path: 'operations/deliveries',
-                element: <PlaceholderModule title="Outbound Deliveries List" moduleName="Deliveries" category="Operations" createPath="/operations/deliveries/new" />,
+                element: <SuspenseWrapper><DeliveryList /></SuspenseWrapper>,
               },
               {
                 path: 'operations/deliveries/new',
-                element: <PlaceholderModule title="Create Outbound Delivery" moduleName="New Delivery" category="Operations" />,
+                element: <SuspenseWrapper><DeliveryCreate /></SuspenseWrapper>,
               },
               {
                 path: 'operations/deliveries/:id',
-                element: <PlaceholderModule title="Delivery Detail: WH/OUT/0001" moduleName="Delivery Detail" category="Operations" />,
+                element: <SuspenseWrapper><DeliveryDetail /></SuspenseWrapper>,
               },
               /* Transfers */
               {
