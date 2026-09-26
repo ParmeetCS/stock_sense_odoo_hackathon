@@ -12,7 +12,8 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<{ error: Error | null }>;
   resetPasswordForEmail: (email: string) => Promise<{ error: Error | null }>;
-  verifyOtp: (email: string, token: string, type?: 'recovery' | 'signup') => Promise<{ error: Error | null }>;
+  sendOtp: (identifier: string, channel?: 'email' | 'phone') => Promise<{ error: Error | null }>;
+  verifyOtp: (identifier: string, token: string, type?: 'recovery' | 'signup' | 'email' | 'sms') => Promise<{ error: Error | null }>;
   updatePassword: (newPassword: string) => Promise<{ error: Error | null }>;
   fetchProfile: (userId: string) => Promise<Profile | null>;
 }
@@ -138,14 +139,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const verifyOtp = async (email: string, token: string, type: 'recovery' | 'signup' = 'recovery') => {
+  const sendOtp = async (identifier: string, channel: 'email' | 'phone' = 'email') => {
     try {
-      const { error } = await supabase.auth.verifyOtp({
-        email,
-        token,
-        type,
-      });
-      return { error };
+      if (channel === 'phone') {
+        const { error } = await supabase.auth.signInWithOtp({
+          phone: identifier,
+        });
+        return { error };
+      } else {
+        const { error } = await supabase.auth.signInWithOtp({
+          email: identifier,
+        });
+        return { error };
+      }
+    } catch (err) {
+      return { error: err as Error };
+    }
+  };
+
+  const verifyOtp = async (
+    identifier: string,
+    token: string,
+    type: 'recovery' | 'signup' | 'email' | 'sms' = 'recovery'
+  ) => {
+    try {
+      if (type === 'sms') {
+        const { error } = await supabase.auth.verifyOtp({
+          phone: identifier,
+          token,
+          type: 'sms',
+        });
+        return { error };
+      } else {
+        const { error } = await supabase.auth.verifyOtp({
+          email: identifier,
+          token,
+          type: type as 'recovery' | 'signup' | 'email',
+        });
+        return { error };
+      }
     } catch (err) {
       return { error: err as Error };
     }
@@ -173,6 +205,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         signIn,
         signOut,
         resetPasswordForEmail,
+        sendOtp,
         verifyOtp,
         updatePassword,
         fetchProfile,

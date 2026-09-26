@@ -3,14 +3,17 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Card, CardHeader, CardTitle } from '../../components/ui/Card';
-import { KeyRound, Mail, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { KeyRound, Mail, Phone, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const OtpVerification: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { verifyOtp } = useAuth();
 
-  const [email, setEmail] = useState((location.state as { email?: string })?.email || '');
+  const state = location.state as { email?: string; type?: 'recovery' | 'signup' | 'email' | 'sms' } | undefined;
+
+  const [identifier, setIdentifier] = useState(state?.email || '');
+  const [type] = useState<'recovery' | 'signup' | 'email' | 'sms'>(state?.type || 'recovery');
   const [token, setToken] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -20,15 +23,21 @@ export const OtpVerification: React.FC = () => {
     setError(null);
     setLoading(true);
 
-    const { error: verifyError } = await verifyOtp(email, token, 'recovery');
+    const { error: verifyError } = await verifyOtp(identifier, token, type);
 
     if (verifyError) {
-      setError(verifyError.message || 'Invalid OTP token code.');
+      setError(verifyError.message || 'Invalid or expired OTP verification code.');
       setLoading(false);
     } else {
-      navigate('/reset-password');
+      if (type === 'recovery' || type === 'email' || type === 'sms') {
+        navigate('/reset-password');
+      } else {
+        navigate('/login');
+      }
     }
   };
+
+  const isPhone = type === 'sms' || identifier.startsWith('+');
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-6 text-slate-100">
@@ -41,13 +50,18 @@ export const OtpVerification: React.FC = () => {
             OTP Verification
           </h1>
           <p className="text-sm text-slate-400">
-            Enter the OTP security token sent to your registered email
+            Enter the 6-digit OTP security token sent to your {isPhone ? 'mobile number' : 'email address'}
           </p>
         </div>
 
         <Card className="bg-slate-900 border-slate-800 shadow-2xl">
           <CardHeader className="border-slate-800">
-            <CardTitle className="text-base text-slate-200">Verify Security Token</CardTitle>
+            <CardTitle className="text-base text-slate-200 flex items-center justify-between">
+              <span>Verify Security Token</span>
+              <span className="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase font-mono">
+                {type}
+              </span>
+            </CardTitle>
           </CardHeader>
 
           {error && (
@@ -60,16 +74,20 @@ export const OtpVerification: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Registered Email
+                {isPhone ? 'Phone Number' : 'Registered Email'}
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                {isPhone ? (
+                  <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                ) : (
+                  <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                )}
                 <input
-                  type="email"
+                  type={isPhone ? 'tel' : 'email'}
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  placeholder={isPhone ? '+15550001234' : 'name@company.com'}
                   className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
@@ -77,13 +95,14 @@ export const OtpVerification: React.FC = () => {
 
             <div>
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                6-Digit OTP Token
+                6-Digit OTP Token Code
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
                   type="text"
                   required
+                  maxLength={6}
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
                   placeholder="123456"
@@ -106,7 +125,7 @@ export const OtpVerification: React.FC = () => {
           <div className="mt-6 pt-4 border-t border-slate-800 text-center text-xs text-slate-400">
             Didn't receive token?{' '}
             <Link to="/forgot-password" className="text-blue-400 font-semibold hover:underline">
-              Resend Recovery Email
+              Resend Code via Email / SMS
             </Link>
           </div>
         </Card>
