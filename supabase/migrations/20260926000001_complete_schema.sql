@@ -9,7 +9,8 @@ CREATE TYPE public.ledger_entry_type AS ENUM ('receipt', 'delivery', 'transfer_i
 -- 1. Profiles (User representation)
 CREATE TABLE IF NOT EXISTS public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-    email TEXT NOT NULL UNIQUE,
+    email TEXT UNIQUE,
+    phone TEXT UNIQUE,
     full_name TEXT,
     role public.user_role NOT NULL DEFAULT 'inventory_user',
     avatar_url TEXT,

@@ -5,16 +5,25 @@
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, full_name, role)
+  INSERT INTO public.profiles (id, email, phone, full_name, role)
   VALUES (
     NEW.id,
     NEW.email,
-    COALESCE(NEW.raw_user_meta_data->>'full_name', SPLIT_PART(NEW.email, '@', 1)),
+    NEW.phone,
+    COALESCE(
+      NEW.raw_user_meta_data->>'full_name',
+      CASE 
+        WHEN NEW.email IS NOT NULL THEN SPLIT_PART(NEW.email, '@', 1)
+        WHEN NEW.phone IS NOT NULL THEN 'User ' || RIGHT(NEW.phone, 4)
+        ELSE 'StockSense User'
+      END
+    ),
     COALESCE((NEW.raw_user_meta_data->>'role')::public.user_role, 'inventory_user'::public.user_role)
   )
   ON CONFLICT (id) DO UPDATE
   SET email = EXCLUDED.email,
-      full_name = EXCLUDED.full_name,
+      phone = EXCLUDED.phone,
+      full_name = COALESCE(public.profiles.full_name, EXCLUDED.full_name),
       updated_at = now();
   RETURN NEW;
 END;
