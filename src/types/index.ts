@@ -42,10 +42,50 @@ export interface Product {
   cost_price: number;
   sale_price: number;
   reorder_level: number;
+  reorder_quantity?: number;
   is_active: boolean;
   created_at?: string;
   updated_at?: string;
   category?: Category;
+  // Computed & aggregated inventory values for views
+  on_hand?: number;
+  reserved?: number;
+  free_to_use?: number;
+  warehouse_name?: string;
+  location_name?: string;
+  stock_status?: 'in_stock' | 'low_stock' | 'out_of_stock';
+  stocks?: Stock[];
+}
+
+export interface CreateProductInput {
+  name: string;
+  sku: string;
+  category_id?: string;
+  unit_of_measure: string;
+  cost_price?: number;
+  sale_price?: number;
+  reorder_level?: number;
+  reorder_quantity?: number;
+  is_active?: boolean;
+  description?: string;
+  initial_stock?: {
+    warehouse_id: string;
+    location_id: string;
+    quantity: number;
+  };
+}
+
+export interface UpdateProductInput {
+  name?: string;
+  sku?: string;
+  category_id?: string;
+  unit_of_measure?: string;
+  cost_price?: number;
+  sale_price?: number;
+  reorder_level?: number;
+  reorder_quantity?: number;
+  is_active?: boolean;
+  description?: string;
 }
 
 export interface Warehouse {
@@ -56,6 +96,25 @@ export interface Warehouse {
   is_active: boolean;
   created_at?: string;
   updated_at?: string;
+  // Computed fields
+  location_count?: number;
+  stock_quantity?: number;
+  locations?: Location[];
+  stocks?: Stock[];
+}
+
+export interface CreateWarehouseInput {
+  name: string;
+  code: string;
+  address?: string;
+  is_active?: boolean;
+}
+
+export interface UpdateWarehouseInput {
+  name?: string;
+  code?: string;
+  address?: string;
+  is_active?: boolean;
 }
 
 export interface Location {
@@ -64,9 +123,29 @@ export interface Location {
   code: string;
   name: string;
   type: string;
+  is_active?: boolean;
   created_at?: string;
   updated_at?: string;
   warehouse?: Warehouse;
+  // Computed fields
+  stock_quantity?: number;
+  stocks?: Stock[];
+}
+
+export interface CreateLocationInput {
+  warehouse_id: string;
+  code: string;
+  name: string;
+  type?: string;
+  is_active?: boolean;
+}
+
+export interface UpdateLocationInput {
+  warehouse_id?: string;
+  code?: string;
+  name?: string;
+  type?: string;
+  is_active?: boolean;
 }
 
 export interface Stock {
@@ -198,6 +277,7 @@ export interface StockLedger {
   product?: Product;
   warehouse?: Warehouse;
   location?: Location;
+  user?: Profile;
 }
 
 export interface SystemHealth {

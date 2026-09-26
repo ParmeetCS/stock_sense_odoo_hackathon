@@ -9,6 +9,15 @@ import { OtpVerification } from '../pages/auth/OtpVerification';
 import { ResetPassword } from '../pages/auth/ResetPassword';
 import { ProfilePage } from '../pages/ProfilePage';
 import { Dashboard } from '../pages/Dashboard';
+import { ProductList } from '../pages/products/ProductList';
+import { ProductCreate } from '../pages/products/ProductCreate';
+import { ProductDetail } from '../pages/products/ProductDetail';
+import { WarehouseList } from '../pages/warehouses/WarehouseList';
+import { WarehouseCreate } from '../pages/warehouses/WarehouseCreate';
+import { WarehouseDetail } from '../pages/warehouses/WarehouseDetail';
+import { LocationList } from '../pages/locations/LocationList';
+import { LocationCreate } from '../pages/locations/LocationCreate';
+import { LocationDetail } from '../pages/locations/LocationDetail';
 import { PlaceholderModule } from '../components/PlaceholderModule';
 
 const router = createBrowserRouter([
@@ -38,15 +47,15 @@ const router = createBrowserRouter([
               /* Products */
               {
                 path: 'products',
-                element: <PlaceholderModule title="StockSense Product Catalog" moduleName="Products" category="Inventory" createPath="/products/new" />,
+                element: <ProductList />,
               },
               {
                 path: 'products/new',
-                element: <PlaceholderModule title="Create New Product" moduleName="New Product" category="Inventory" />,
+                element: <ProductCreate />,
               },
               {
                 path: 'products/:id',
-                element: <PlaceholderModule title="Product Details: DESK001" moduleName="Product Details" category="Inventory" />,
+                element: <ProductDetail />,
               },
               /* Stock */
               {
@@ -110,14 +119,31 @@ const router = createBrowserRouter([
                 path: 'move-history',
                 element: <PlaceholderModule title="Move History & Audit Trail" moduleName="Move History" category="Audit" />,
               },
-              /* Settings */
+              /* Settings - Warehouses */
               {
                 path: 'settings/warehouses',
-                element: <PlaceholderModule title="Warehouse Facilities" moduleName="Warehouses" category="Configuration" />,
+                element: <WarehouseList />,
               },
               {
+                path: 'settings/warehouses/new',
+                element: <WarehouseCreate />,
+              },
+              {
+                path: 'settings/warehouses/:id',
+                element: <WarehouseDetail />,
+              },
+              /* Settings - Locations */
+              {
                 path: 'settings/locations',
-                element: <PlaceholderModule title="Locations & Bins Hierarchy" moduleName="Locations" category="Configuration" />,
+                element: <LocationList />,
+              },
+              {
+                path: 'settings/locations/new',
+                element: <LocationCreate />,
+              },
+              {
+                path: 'settings/locations/:id',
+                element: <LocationDetail />,
               },
               /* Profile */
               {
