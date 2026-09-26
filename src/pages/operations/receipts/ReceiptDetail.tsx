@@ -19,8 +19,10 @@ import {
 import { PageHeader } from '../../../components/ui/PageHeader';
 import { Button } from '../../../components/ui/Button';
 import { StatusBadge } from '../../../components/ui/StatusBadge';
+import { ConfirmDialog } from '../../../components/ui/Modal';
 import { useToast } from '../../../components/ui/Toast';
 import { useAuth } from '../../../context/AuthContext';
+import { parseErrorMessage } from '../../../utils/errorHandler';
 import {
   fetchReceiptById,
   validateReceipt,
@@ -50,6 +52,10 @@ export const ReceiptDetail: React.FC = () => {
   const [validating, setValidating] = useState(false);
   const [copiedRef, setCopiedRef] = useState(false);
 
+  // Confirmation Modal States
+  const [showValidateModal, setShowValidateModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+
   const loadData = async () => {
     if (!id) return;
     setLoading(true);
@@ -59,7 +65,7 @@ export const ReceiptDetail: React.FC = () => {
       setLedger(data.ledger);
       setStockImpact(data.stockImpact);
     } catch (err: any) {
-      showToast('Receipt Not Found', err.message || 'Failed to load receipt details.', 'error');
+      showToast('Receipt Not Found', parseErrorMessage(err), 'error');
       navigate('/operations/receipts');
     } finally {
       setLoading(false);
@@ -84,23 +90,41 @@ export const ReceiptDetail: React.FC = () => {
     try {
       const res = await validateReceipt(id, user?.id);
       showToast('Receipt Validated', res.message, 'success');
+      setShowValidateModal(false);
       loadData();
     } catch (err: any) {
-      showToast('Validation Error', err.message, 'error');
+      showToast('Validation Error', parseErrorMessage(err), 'error');
     } finally {
       setValidating(false);
+    }
+  };
+
+  // Cancel Receipt
+  const handleCancel = async () => {
+    if (!id) return;
+    try {
+      await updateReceiptStatus(id, 'canceled');
+      showToast('Receipt Canceled', 'Inbound receipt status set to canceled.', 'success');
+      setShowCancelModal(false);
+      loadData();
+    } catch (err: any) {
+      showToast('Cancellation Failed', parseErrorMessage(err), 'error');
     }
   };
 
   // Change Status
   const handleStatusChange = async (newStatus: OrderStatus) => {
     if (!id) return;
+    if (newStatus === 'canceled') {
+      setShowCancelModal(true);
+      return;
+    }
     try {
       await updateReceiptStatus(id, newStatus);
       showToast('Status Updated', `Receipt status changed to ${newStatus}.`, 'success');
       loadData();
     } catch (err: any) {
-      showToast('Status Update Failed', err.message, 'error');
+      showToast('Status Update Failed', parseErrorMessage(err), 'error');
     }
   };
 
@@ -206,7 +230,7 @@ export const ReceiptDetail: React.FC = () => {
                   <Button
                     variant="primary"
                     size="sm"
-                    onClick={handleValidate}
+                    onClick={() => setShowValidateModal(true)}
                     disabled={validating}
                     className="bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-500/20 text-xs font-semibold"
                   >
@@ -518,6 +542,29 @@ export const ReceiptDetail: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Confirm Validation Modal */}
+      <ConfirmDialog
+        isOpen={showValidateModal}
+        onClose={() => setShowValidateModal(false)}
+        onConfirm={handleValidate}
+        title="Confirm Goods Receipt Validation"
+        message={`Are you sure you want to validate and process receipt ${receipt.reference}? This will atomically increase stock levels and record immutable ledger audit entries.`}
+        confirmLabel="Validate & Receive"
+        variant="primary"
+        loading={validating}
+      />
+
+      {/* Confirm Cancellation Modal */}
+      <ConfirmDialog
+        isOpen={showCancelModal}
+        onClose={() => setShowCancelModal(false)}
+        onConfirm={handleCancel}
+        title="Cancel Inbound Receipt"
+        message={`Are you sure you want to cancel receipt ${receipt.reference}? Canceled receipts cannot be completed.`}
+        confirmLabel="Cancel Receipt Order"
+        variant="danger"
+      />
     </div>
   );
 };

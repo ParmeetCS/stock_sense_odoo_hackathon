@@ -17,8 +17,10 @@ import {
 import { PageHeader } from '../../../components/ui/PageHeader';
 import { Button } from '../../../components/ui/Button';
 import { StatusBadge } from '../../../components/ui/StatusBadge';
+import { ConfirmDialog } from '../../../components/ui/Modal';
 import { useToast } from '../../../components/ui/Toast';
 import { useAuth } from '../../../context/AuthContext';
+import { parseErrorMessage } from '../../../utils/errorHandler';
 import {
   fetchAdjustmentById,
   validateAdjustment,
@@ -46,6 +48,10 @@ export const AdjustmentDetail: React.FC = () => {
     }
   }, [id]);
 
+  // Confirmation Modal States
+  const [showValidateModal, setShowValidateModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+
   const loadAdjustmentDetail = async () => {
     try {
       setLoading(true);
@@ -54,7 +60,7 @@ export const AdjustmentDetail: React.FC = () => {
       setLedger(data.ledger);
       setCurrentStock(data.currentStock);
     } catch (err: any) {
-      showToast(err.message || 'Failed to load adjustment details', 'error');
+      showToast('Error Loading Adjustment', parseErrorMessage(err), 'error');
     } finally {
       setLoading(false);
     }
@@ -66,23 +72,40 @@ export const AdjustmentDetail: React.FC = () => {
     try {
       setValidating(true);
       const result = await validateAdjustment(adjustment.id, user?.id);
-      showToast(result.message, 'success');
+      showToast('Adjustment Validated', result.message, 'success');
+      setShowValidateModal(false);
       loadAdjustmentDetail();
     } catch (err: any) {
-      showToast(err.message || 'Adjustment validation failed', 'error');
+      showToast('Validation Error', parseErrorMessage(err), 'error');
     } finally {
       setValidating(false);
     }
   };
 
-  const handleStatusChange = async (newStatus: OrderStatus) => {
+  const handleCancel = async () => {
     if (!adjustment) return;
     try {
-      await updateAdjustmentStatus(adjustment.id, newStatus);
-      showToast(`Adjustment status updated to ${newStatus}`, 'success');
+      await updateAdjustmentStatus(adjustment.id, 'canceled');
+      showToast('Adjustment Canceled', 'Inventory adjustment status set to canceled.', 'success');
+      setShowCancelModal(false);
       loadAdjustmentDetail();
     } catch (err: any) {
-      showToast(err.message || 'Failed to update status', 'error');
+      showToast('Cancellation Error', parseErrorMessage(err), 'error');
+    }
+  };
+
+  const handleStatusChange = async (newStatus: OrderStatus) => {
+    if (!adjustment) return;
+    if (newStatus === 'canceled') {
+      setShowCancelModal(true);
+      return;
+    }
+    try {
+      await updateAdjustmentStatus(adjustment.id, newStatus);
+      showToast('Status Updated', `Adjustment status updated to ${newStatus}`, 'success');
+      loadAdjustmentDetail();
+    } catch (err: any) {
+      showToast('Status Update Failed', parseErrorMessage(err), 'error');
     }
   };
 
@@ -227,7 +250,7 @@ export const AdjustmentDetail: React.FC = () => {
             <Button
               variant="primary"
               size="sm"
-              onClick={handleValidate}
+              onClick={() => setShowValidateModal(true)}
               disabled={validating}
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 shadow-lg shadow-emerald-900/30"
             >
@@ -535,6 +558,29 @@ export const AdjustmentDetail: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Confirm Validation Modal */}
+      <ConfirmDialog
+        isOpen={showValidateModal}
+        onClose={() => setShowValidateModal(false)}
+        onConfirm={handleValidate}
+        title="Confirm Inventory Adjustment Validation"
+        message={`Are you sure you want to validate adjustment ${adjustment.reference}? The on-hand stock for ${adjustment.product?.name} will be updated to ${adjustment.real_quantity} (Difference: ${Number(adjustment.real_quantity) - Number(adjustment.theoretical_quantity)}).`}
+        confirmLabel="Validate & Adjust Stock"
+        variant="primary"
+        loading={validating}
+      />
+
+      {/* Confirm Cancellation Modal */}
+      <ConfirmDialog
+        isOpen={showCancelModal}
+        onClose={() => setShowCancelModal(false)}
+        onConfirm={handleCancel}
+        title="Cancel Inventory Adjustment"
+        message={`Are you sure you want to cancel adjustment ${adjustment.reference}? Canceled adjustments cannot be validated.`}
+        confirmLabel="Cancel Adjustment"
+        variant="danger"
+      />
     </div>
   );
 };

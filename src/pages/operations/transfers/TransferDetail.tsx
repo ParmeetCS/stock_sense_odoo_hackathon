@@ -18,8 +18,10 @@ import {
 import { PageHeader } from '../../../components/ui/PageHeader';
 import { Button } from '../../../components/ui/Button';
 import { StatusBadge } from '../../../components/ui/StatusBadge';
+import { ConfirmDialog } from '../../../components/ui/Modal';
 import { useToast } from '../../../components/ui/Toast';
 import { useAuth } from '../../../context/AuthContext';
+import { parseErrorMessage } from '../../../utils/errorHandler';
 import {
   fetchTransferById,
   validateTransfer,
@@ -48,6 +50,10 @@ export const TransferDetail: React.FC = () => {
     }
   }, [id]);
 
+  // Confirmation Modal States
+  const [showValidateModal, setShowValidateModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+
   const loadTransferDetail = async () => {
     try {
       setLoading(true);
@@ -56,7 +62,7 @@ export const TransferDetail: React.FC = () => {
       setLedger(data.ledger);
       setStockImpact(data.stockImpact);
     } catch (err: any) {
-      showToast(err.message || 'Failed to load internal transfer details', 'error');
+      showToast('Error Loading Transfer', parseErrorMessage(err), 'error');
     } finally {
       setLoading(false);
     }
@@ -68,23 +74,40 @@ export const TransferDetail: React.FC = () => {
     try {
       setValidating(true);
       const result = await validateTransfer(transfer.id, user?.id);
-      showToast(result.message, 'success');
+      showToast('Transfer Validated', result.message, 'success');
+      setShowValidateModal(false);
       loadTransferDetail();
     } catch (err: any) {
-      showToast(err.message || 'Transfer validation failed', 'error');
+      showToast('Validation Error', parseErrorMessage(err), 'error');
     } finally {
       setValidating(false);
     }
   };
 
-  const handleStatusChange = async (newStatus: OrderStatus) => {
+  const handleCancel = async () => {
     if (!transfer) return;
     try {
-      await updateTransferStatus(transfer.id, newStatus);
-      showToast(`Transfer status updated to ${newStatus}`, 'success');
+      await updateTransferStatus(transfer.id, 'canceled');
+      showToast('Transfer Canceled', 'Internal transfer status changed to canceled.', 'success');
+      setShowCancelModal(false);
       loadTransferDetail();
     } catch (err: any) {
-      showToast(err.message || 'Failed to update status', 'error');
+      showToast('Cancellation Error', parseErrorMessage(err), 'error');
+    }
+  };
+
+  const handleStatusChange = async (newStatus: OrderStatus) => {
+    if (!transfer) return;
+    if (newStatus === 'canceled') {
+      setShowCancelModal(true);
+      return;
+    }
+    try {
+      await updateTransferStatus(transfer.id, newStatus);
+      showToast('Status Updated', `Transfer status updated to ${newStatus}`, 'success');
+      loadTransferDetail();
+    } catch (err: any) {
+      showToast('Status Update Failed', parseErrorMessage(err), 'error');
     }
   };
 
@@ -213,7 +236,7 @@ export const TransferDetail: React.FC = () => {
             <Button
               variant="primary"
               size="sm"
-              onClick={handleValidate}
+              onClick={() => setShowValidateModal(true)}
               disabled={validating}
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 shadow-lg shadow-emerald-900/30"
             >
@@ -553,6 +576,29 @@ export const TransferDetail: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Confirm Validation Modal */}
+      <ConfirmDialog
+        isOpen={showValidateModal}
+        onClose={() => setShowValidateModal(false)}
+        onConfirm={handleValidate}
+        title="Confirm Internal Transfer Validation"
+        message={`Are you sure you want to validate transfer ${transfer.reference}? Stock will decrease at ${transfer.source_location?.name} and increase at ${transfer.destination_location?.name}.`}
+        confirmLabel="Validate & Transfer"
+        variant="primary"
+        loading={validating}
+      />
+
+      {/* Confirm Cancellation Modal */}
+      <ConfirmDialog
+        isOpen={showCancelModal}
+        onClose={() => setShowCancelModal(false)}
+        onConfirm={handleCancel}
+        title="Cancel Internal Transfer"
+        message={`Are you sure you want to cancel transfer ${transfer.reference}? Canceled transfers cannot be validated.`}
+        confirmLabel="Cancel Transfer Order"
+        variant="danger"
+      />
     </div>
   );
 };

@@ -76,6 +76,7 @@ interface ConfirmDialogProps {
   message: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  variant?: 'danger' | 'primary' | 'warning';
   loading?: boolean;
 }
 
@@ -87,6 +88,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   message,
   confirmLabel = 'Confirm Action',
   cancelLabel = 'Cancel',
+  variant = 'danger',
   loading = false,
 }) => {
   return (
@@ -100,14 +102,26 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <Button variant="outline" size="sm" onClick={onClose} disabled={loading}>
             {cancelLabel}
           </Button>
-          <Button variant="danger" size="sm" onClick={onConfirm} disabled={loading}>
+          <Button
+            variant={variant === 'danger' ? 'danger' : 'primary'}
+            size="sm"
+            onClick={onConfirm}
+            disabled={loading}
+          >
             {loading ? 'Processing...' : confirmLabel}
           </Button>
         </>
       }
     >
       <div className="flex items-start gap-3">
-        <div className="p-2.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 shrink-0">
+        <div
+          className={cn(
+            'p-2.5 rounded-full border shrink-0',
+            variant === 'danger' && 'bg-red-500/10 border-red-500/30 text-red-400',
+            variant === 'warning' && 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+            variant === 'primary' && 'bg-blue-500/10 border-blue-500/30 text-blue-400'
+          )}
+        >
           <AlertTriangle className="w-5 h-5" />
         </div>
         <p className="text-xs text-slate-300 leading-relaxed mt-1">{message}</p>
