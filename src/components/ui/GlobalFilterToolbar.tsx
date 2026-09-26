@@ -134,19 +134,21 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
         {/* Main Search Input */}
         {onSearchChange && (
           <div className="relative flex-1 min-w-[220px]">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
             <input
               type="text"
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder={searchPlaceholder}
-              className="w-full h-9 pl-9 pr-8 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-all"
+              aria-label={searchPlaceholder}
+              className="w-full h-9 pl-9 pr-8 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all"
             />
             {search && (
               <button
                 type="button"
                 onClick={() => onSearchChange('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                aria-label="Clear search"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -157,7 +159,7 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
         {/* Secondary Search (SKU / Contact / Product) */}
         {secondarySearch && (
           <div className="relative flex-1 min-w-[180px]">
-            <span className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+            <span className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
               {secondarySearch.icon || <Package className="w-4 h-4" />}
             </span>
             <input
@@ -165,13 +167,15 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
               value={secondarySearch.value}
               onChange={(e) => secondarySearch.onChange(e.target.value)}
               placeholder={secondarySearch.placeholder}
-              className="w-full h-9 pl-9 pr-8 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-all"
+              aria-label={secondarySearch.placeholder}
+              className="w-full h-9 pl-9 pr-8 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all"
             />
             {secondarySearch.value && (
               <button
                 type="button"
                 onClick={() => secondarySearch.onChange('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                aria-label="Clear secondary search"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -185,7 +189,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedCategory}
               onChange={(e) => onCategoryChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Category filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">All Categories</option>
               {categories.map((c) => (
@@ -203,7 +208,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedWarehouse}
               onChange={(e) => onWarehouseChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Warehouse filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">{warehouseLabel}</option>
               {warehouses.map((w) => (
@@ -221,7 +227,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedDestinationWarehouse}
               onChange={(e) => onDestinationWarehouseChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Destination warehouse filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">Dest WH: All</option>
               {destinationWarehouses.map((w) => (
@@ -239,7 +246,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedLocation}
               onChange={(e) => onLocationChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Location filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">All Locations</option>
               {locations.map((loc) => (
@@ -257,7 +265,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedStatus}
               onChange={(e) => onStatusChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Status filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">All Statuses</option>
               {statuses.map((s) => (
@@ -275,7 +284,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedReason}
               onChange={(e) => onReasonChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Reason filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">All Reasons</option>
               {reasons.map((r) => (
@@ -293,7 +303,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={selectedOperation}
               onChange={(e) => onOperationChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Operation filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <option value="all">All Operations</option>
               {operations.map((op) => (
@@ -313,7 +324,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
               type="date"
               value={startDate || ''}
               onChange={(e) => onStartDateChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500"
+              aria-label="Start date filter"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
               title="Start Date"
             />
             {onEndDateChange && (
@@ -323,7 +335,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
                   type="date"
                   value={endDate || ''}
                   onChange={(e) => onEndDateChange(e.target.value)}
-                  className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500"
+                  aria-label="End date filter"
+                  className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
                   title="End Date"
                 />
               </>
@@ -337,7 +350,8 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
             <select
               value={sortBy}
               onChange={(e) => onSortByChange(e.target.value)}
-              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+              aria-label="Sort by options"
+              className="h-9 bg-slate-950 border border-slate-800 rounded-lg px-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               {sortOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -353,6 +367,7 @@ export const GlobalFilterToolbar: React.FC<GlobalFilterToolbarProps> = ({
                 onClick={onToggleSortOrder}
                 className="h-9 px-2.5 border-slate-800 text-slate-300 hover:bg-slate-800"
                 title={`Sort ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
+                aria-label={`Toggle sort order, current: ${sortOrder}`}
               >
                 <ArrowUpDown className="w-3.5 h-3.5 mr-1" />
                 <span className="text-[11px] uppercase font-bold">{sortOrder}</span>

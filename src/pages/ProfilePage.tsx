@@ -370,18 +370,20 @@ export const ProfilePage: React.FC = () => {
         maxWidth="md"
       >
         <form onSubmit={handleSaveProfile} className="space-y-4">
-          <FormField label="Full Name" required>
+          <FormField label="Full Name" htmlFor="profile-fullname" required>
             <input
+              id="profile-fullname"
               type="text"
               value={editFullName}
               onChange={(e) => setEditFullName(e.target.value)}
               placeholder="e.g. Parmeet CS"
-              className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
             />
           </FormField>
 
-          <FormField label="Email Address (Read-Only)">
+          <FormField label="Email Address (Read-Only)" htmlFor="profile-email-readonly">
             <input
+              id="profile-email-readonly"
               type="text"
               value={user?.email || ''}
               disabled
@@ -389,8 +391,9 @@ export const ProfilePage: React.FC = () => {
             />
           </FormField>
 
-          <FormField label="Role (Read-Only)">
+          <FormField label="Role (Read-Only)" htmlFor="profile-role-readonly">
             <input
+              id="profile-role-readonly"
               type="text"
               value={profile?.role || 'inventory_user'}
               disabled
@@ -440,18 +443,20 @@ export const ProfilePage: React.FC = () => {
           )}
 
           {/* Current Password */}
-          <FormField label="Current Password" required>
+          <FormField label="Current Password" htmlFor="profile-curr-pass" required>
             <div className="relative">
               <input
+                id="profile-curr-pass"
                 type={showCurrentPass ? 'text' : 'password'}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="Enter your current password"
-                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
               />
               <button
                 type="button"
                 onClick={() => setShowCurrentPass(!showCurrentPass)}
+                aria-label={showCurrentPass ? 'Hide password' : 'Show password'}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
               >
                 {showCurrentPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -460,18 +465,20 @@ export const ProfilePage: React.FC = () => {
           </FormField>
 
           {/* New Password */}
-          <FormField label="New Password" required helperText="Must be at least 6 characters long">
+          <FormField label="New Password" htmlFor="profile-new-pass" required helperText="Must be at least 6 characters long">
             <div className="relative">
               <input
+                id="profile-new-pass"
                 type={showNewPass ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Enter new password"
-                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
               />
               <button
                 type="button"
                 onClick={() => setShowNewPass(!showNewPass)}
+                aria-label={showNewPass ? 'Hide password' : 'Show password'}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
               >
                 {showNewPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -480,18 +487,20 @@ export const ProfilePage: React.FC = () => {
           </FormField>
 
           {/* Confirm Password */}
-          <FormField label="Confirm New Password" required>
+          <FormField label="Confirm New Password" htmlFor="profile-confirm-pass" required>
             <div className="relative">
               <input
+                id="profile-confirm-pass"
                 type={showConfirmPass ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Re-enter new password"
-                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 pr-10 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPass(!showConfirmPass)}
+                aria-label={showConfirmPass ? 'Hide password' : 'Show password'}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
               >
                 {showConfirmPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}

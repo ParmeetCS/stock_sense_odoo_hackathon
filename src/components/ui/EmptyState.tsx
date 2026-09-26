@@ -22,6 +22,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <div
+      role="status"
       className={cn(
         'flex flex-col items-center justify-center p-12 text-center rounded-xl border border-dashed border-slate-800 bg-slate-900/40 my-4',
         className
@@ -46,7 +47,11 @@ export const LoadingState: React.FC<{ message?: string; className?: string }> = 
   className,
 }) => {
   return (
-    <div className={cn('flex flex-col items-center justify-center p-12 my-4', className)}>
+    <div
+      role="status"
+      aria-live="polite"
+      className={cn('flex flex-col items-center justify-center p-12 my-4', className)}
+    >
       <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-3" />
       <span className="text-xs font-medium text-slate-400">{message}</span>
     </div>
@@ -61,6 +66,7 @@ export const ErrorState: React.FC<{
 }> = ({ title = 'Failed to Load Data', message = 'An error occurred while fetching records.', onRetry, className }) => {
   return (
     <div
+      role="alert"
       className={cn(
         'p-6 rounded-xl bg-red-500/10 border border-red-500/30 text-center my-4 max-w-md mx-auto',
         className

@@ -42,16 +42,17 @@ export function DataTable<T extends Record<string, any>>({
   }
 
   return (
-    <div className={cn('w-full overflow-x-auto rounded-lg border border-slate-800 bg-slate-900/60 shadow-sm', className)}>
-      <table className="w-full text-left border-collapse">
+    <div className={cn('w-full overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/70 shadow-md', className)}>
+      <table className="w-full text-left border-collapse min-w-max">
         <thead>
-          <tr className="bg-slate-900 border-b border-slate-800 text-[11px] font-semibold uppercase tracking-wider text-slate-400 select-none">
+          <tr className="bg-slate-900/90 border-b border-slate-800 text-[11px] font-semibold uppercase tracking-wider text-slate-400 select-none sticky top-0 z-10">
             {columns.map((col) => (
               <th
                 key={col.key}
+                scope="col"
                 style={{ width: col.width }}
                 className={cn(
-                  'px-4 py-3',
+                  'px-4 py-3 font-semibold text-slate-400',
                   col.align === 'right' && 'text-right',
                   col.align === 'center' && 'text-center'
                 )}
@@ -64,20 +65,31 @@ export function DataTable<T extends Record<string, any>>({
         <tbody className="divide-y divide-slate-800/60 text-xs text-slate-200 font-normal">
           {data.map((row, idx) => {
             const key = keyExtractor ? keyExtractor(row, idx) : row.id || String(idx);
+            const isClickable = Boolean(onRowClick);
             return (
               <tr
                 key={key}
+                tabIndex={isClickable ? 0 : undefined}
+                role={isClickable ? 'button' : undefined}
                 onClick={() => onRowClick && onRowClick(row)}
+                onKeyDown={(e) => {
+                  if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    onRowClick?.(row);
+                  }
+                }}
                 className={cn(
-                  'hover:bg-slate-800/50 transition-colors',
-                  onRowClick && 'cursor-pointer'
+                  'transition-colors duration-150',
+                  isClickable
+                    ? 'cursor-pointer hover:bg-slate-800/70 focus:outline-none focus-visible:bg-slate-800/90 focus-visible:ring-1 focus-visible:ring-blue-500'
+                    : 'hover:bg-slate-800/30'
                 )}
               >
                 {columns.map((col) => (
                   <td
                     key={col.key}
                     className={cn(
-                      'px-4 py-3 font-mono-data',
+                      'px-4 py-3 text-slate-300 font-mono-data',
                       col.align === 'right' && 'text-right',
                       col.align === 'center' && 'text-center'
                     )}

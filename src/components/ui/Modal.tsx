@@ -22,6 +22,22 @@ export const Modal: React.FC<ModalProps> = ({
   footer,
   maxWidth = 'md',
 }) => {
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const widthMap = {
@@ -32,9 +48,21 @@ export const Modal: React.FC<ModalProps> = ({
     '2xl': 'max-w-2xl',
   };
 
+  const titleId = `modal-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
+  const subtitleId = subtitle ? `modal-desc-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={subtitleId}
         className={cn(
           'w-full bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]',
           widthMap[maxWidth]
@@ -43,19 +71,27 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/90">
           <div>
-            <h3 className="text-base font-bold text-white">{title}</h3>
-            {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+            <h3 id={titleId} className="text-base font-bold text-white">
+              {title}
+            </h3>
+            {subtitle && (
+              <p id={subtitleId} className="text-xs text-slate-400 mt-0.5">
+                {subtitle}
+              </p>
+            )}
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            aria-label="Close dialog"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto flex-1">{children}</div>
+        <div className="p-6 overflow-y-auto flex-1 text-slate-200 text-xs leading-relaxed">{children}</div>
 
         {/* Footer */}
         {footer && (

@@ -73,7 +73,7 @@ export const OtpVerification: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label htmlFor="otp-identifier" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
                 {isPhone ? 'Phone Number' : 'Registered Email'}
               </label>
               <div className="relative">
@@ -83,30 +83,32 @@ export const OtpVerification: React.FC = () => {
                   <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                 )}
                 <input
+                  id="otp-identifier"
                   type={isPhone ? 'tel' : 'email'}
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder={isPhone ? '+15550001234' : 'name@company.com'}
-                  className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label htmlFor="otp-token" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
                 6-Digit OTP Token Code
               </label>
               <div className="relative">
                 <KeyRound className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
+                  id="otp-token"
                   type="text"
                   required
                   maxLength={6}
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
                   placeholder="123456"
-                  className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white font-mono tracking-widest text-center text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white font-mono tracking-widest text-center text-base focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
                 />
               </div>
             </div>

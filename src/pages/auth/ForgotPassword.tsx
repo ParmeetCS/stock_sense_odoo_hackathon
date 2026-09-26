@@ -157,18 +157,19 @@ export const ForgotPassword: React.FC = () => {
               {channel === 'email' ? (
                 <>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                    <label htmlFor="forgot-email" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
                       Account Email Address
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                       <input
+                        id="forgot-email"
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="name@company.com"
-                        className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -182,7 +183,7 @@ export const ForgotPassword: React.FC = () => {
                           name="mode"
                           checked={mode === 'otp'}
                           onChange={() => setMode('otp')}
-                          className="accent-blue-500"
+                          className="accent-blue-500 focus:ring-blue-500"
                         />
                         <span>6-Digit OTP</span>
                       </label>
@@ -192,7 +193,7 @@ export const ForgotPassword: React.FC = () => {
                           name="mode"
                           checked={mode === 'link'}
                           onChange={() => setMode('link')}
-                          className="accent-blue-500"
+                          className="accent-blue-500 focus:ring-blue-500"
                         />
                         <span>Reset Link</span>
                       </label>
@@ -201,18 +202,19 @@ export const ForgotPassword: React.FC = () => {
                 </>
               ) : (
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                  <label htmlFor="forgot-phone" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
                     Mobile Phone Number (E.164 Format)
                   </label>
                   <div className="relative">
                     <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
+                      id="forgot-phone"
                       type="tel"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+15550001234 or +919876543210"
-                      className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full h-10 pl-9 pr-3 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
                     />
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1">

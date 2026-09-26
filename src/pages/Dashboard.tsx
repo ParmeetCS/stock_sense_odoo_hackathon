@@ -180,6 +180,7 @@ export const Dashboard: React.FC = () => {
             <select
               value={filters.warehouseId}
               onChange={(e) => setFilters((prev) => ({ ...prev, warehouseId: e.target.value }))}
+              aria-label="Filter by Warehouse"
               className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
             >
               <option value="">All Warehouses</option>
@@ -197,6 +198,7 @@ export const Dashboard: React.FC = () => {
             <select
               value={filters.categoryId}
               onChange={(e) => setFilters((prev) => ({ ...prev, categoryId: e.target.value }))}
+              aria-label="Filter by Category"
               className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
             >
               <option value="">All Categories</option>
@@ -213,6 +215,7 @@ export const Dashboard: React.FC = () => {
             <select
               value={filters.status}
               onChange={(e) => setFilters((prev) => ({ ...prev, status: e.target.value }))}
+              aria-label="Filter by Status"
               className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
             >
               <option value="">All Statuses</option>
@@ -230,6 +233,7 @@ export const Dashboard: React.FC = () => {
             <select
               value={filters.dateRange}
               onChange={(e) => setFilters((prev) => ({ ...prev, dateRange: e.target.value }))}
+              aria-label="Filter by Date Range"
               className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
             >
               <option value="7d">Last 7 Days</option>

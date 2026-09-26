@@ -128,22 +128,24 @@ export const AppShell: React.FC = () => {
       {/* Top Navbar */}
       <header
         className={cn(
-          'fixed top-0 right-0 h-14 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 z-40 px-4 flex items-center justify-between transition-all duration-300',
-          collapsed ? 'left-16' : 'left-64 md:left-64',
-          'left-0 md:left-64'
+          'fixed top-0 right-0 h-14 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 z-40 px-4 flex items-center justify-between transition-all duration-300 left-0',
+          collapsed ? 'md:left-16' : 'md:left-64'
         )}
       >
         <div className="flex items-center gap-3 flex-1 max-w-xl">
           {/* Mobile drawer toggle */}
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+            aria-label="Toggle mobile menu"
+            aria-expanded={mobileOpen}
+            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           {/* Breadcrumb path */}
-          <nav className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+          <nav aria-label="Header Breadcrumb" className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400 font-medium">
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={idx}>
                 {idx > 0 && <ChevronRight className="w-3.5 h-3.5 text-slate-600" />}
@@ -168,8 +170,10 @@ export const AppShell: React.FC = () => {
           {/* Warehouse Selector */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => setSelectedWarehouse(selectedWarehouse === 'WH01' ? 'WH02' : 'WH01')}
-              className="h-8 px-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 hover:bg-slate-800 transition-colors"
+              aria-label="Select Warehouse Facility"
+              className="h-8 px-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <Warehouse className="w-3.5 h-3.5 text-blue-400" />
               <span>{selectedWarehouse === 'WH01' ? 'Main WH [WH01]' : 'North WH [WH02]'}</span>
@@ -178,16 +182,24 @@ export const AppShell: React.FC = () => {
           </div>
 
           {/* Notification Bell */}
-          <button className="relative w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <button
+            type="button"
+            aria-label="System notifications"
+            className="relative w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
             <Bell className="w-4 h-4" />
-            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-500" />
           </button>
 
           {/* User Profile Menu */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center gap-2 pl-2 border-l border-slate-800 text-left hover:opacity-90"
+              aria-expanded={userMenuOpen}
+              aria-haspopup="true"
+              aria-label="User account menu"
+              className="flex items-center gap-2 pl-2 border-l border-slate-800 text-left hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg py-1 px-1"
             >
               <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-300 font-bold text-xs">
                 {profile?.full_name?.charAt(0) || user?.email?.charAt(0) || 'U'}
@@ -210,6 +222,7 @@ export const AppShell: React.FC = () => {
                   <p className="text-[10px] text-slate-400 truncate">{user?.email}</p>
                 </div>
                 <button
+                  type="button"
                   onClick={() => {
                     setUserMenuOpen(false);
                     navigate('/profile');
@@ -219,6 +232,7 @@ export const AppShell: React.FC = () => {
                   <User className="w-3.5 h-3.5 text-blue-400" /> Profile & Settings
                 </button>
                 <button
+                  type="button"
                   onClick={handleLogout}
                   className="w-full px-3 py-2 text-left text-xs text-red-400 hover:bg-red-500/10 flex items-center gap-2 border-t border-slate-800"
                 >
@@ -232,6 +246,7 @@ export const AppShell: React.FC = () => {
 
       {/* Lateral Sidebar (Desktop) */}
       <aside
+        aria-label="Sidebar Navigation"
         className={cn(
           'fixed left-0 top-0 h-full bg-slate-900 border-r border-slate-800 z-50 flex flex-col justify-between transition-all duration-300 hidden md:flex',
           collapsed ? 'w-16' : 'w-64'
@@ -252,8 +267,10 @@ export const AppShell: React.FC = () => {
               )}
             </div>
             <button
+              type="button"
               onClick={() => setCollapsed(!collapsed)}
-              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
@@ -277,7 +294,7 @@ export const AppShell: React.FC = () => {
                       to={item.path}
                       className={({ isActive: linkActive }) =>
                         cn(
-                          'flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-all group',
+                          'flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
                           linkActive || isActive
                             ? 'bg-blue-600 text-white font-semibold shadow-sm'
                             : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-100'
@@ -304,16 +321,18 @@ export const AppShell: React.FC = () => {
           {/* Footer User Info */}
           <div className="p-3 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between">
             <div className="flex items-center gap-2 overflow-hidden">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               {!collapsed && (
                 <span className="text-[11px] text-slate-400 truncate">Systems Operational</span>
               )}
             </div>
             {!collapsed && (
               <button
+                type="button"
                 onClick={handleLogout}
-                className="p-1.5 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors"
+                className="p-1.5 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
                 title="Logout"
+                aria-label="Log out of application"
               >
                 <LogOut className="w-4 h-4" />
               </button>

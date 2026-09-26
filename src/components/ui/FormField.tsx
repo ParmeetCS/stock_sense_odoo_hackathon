@@ -3,6 +3,7 @@ import { cn } from '../../utils/cn';
 
 interface FormFieldProps {
   label: string;
+  htmlFor?: string;
   required?: boolean;
   error?: string;
   helperText?: string;
@@ -12,6 +13,7 @@ interface FormFieldProps {
 
 export const FormField: React.FC<FormFieldProps> = ({
   label,
+  htmlFor,
   required = false,
   error,
   helperText,
@@ -20,14 +22,19 @@ export const FormField: React.FC<FormFieldProps> = ({
 }) => {
   return (
     <div className={cn('space-y-1.5', className)}>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
-        {label} {required && <span className="text-red-400">*</span>}
+      <label
+        htmlFor={htmlFor}
+        className="block text-xs font-semibold uppercase tracking-wider text-slate-300"
+      >
+        {label} {required && <span className="text-red-400" aria-hidden="true">*</span>}
       </label>
       {children}
       {error ? (
-        <span className="block text-xs text-red-400 font-medium">{error}</span>
+        <span role="alert" className="block text-xs text-red-400 font-medium animate-fade-in">
+          {error}
+        </span>
       ) : helperText ? (
-        <span className="block text-xs text-slate-500">{helperText}</span>
+        <span className="block text-[11px] text-slate-400">{helperText}</span>
       ) : null}
     </div>
   );
