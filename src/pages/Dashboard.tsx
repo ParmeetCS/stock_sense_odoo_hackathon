@@ -257,7 +257,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* 6 Core KPI Metric Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">In Stock</span>
@@ -409,27 +409,29 @@ export const Dashboard: React.FC = () => {
           {chartData.length === 0 ? (
             <EmptyState title="No Stock Movements" description="No inventory transactions recorded for the selected filter." />
           ) : (
-            <div className="h-48 w-full flex items-end justify-between gap-2 pt-4 px-2">
-              {chartData.map((d, i) => {
-                const heightPct = d.totalMovement > 0 ? Math.min(100, Math.max(8, (d.totalMovement / maxMovementVal) * 100)) : 2;
-                return (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-2 group relative">
-                    <div className="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded shadow border border-slate-700 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                      {d.totalMovement} Units
+            <div className="overflow-x-auto pb-2">
+              <div className="h-48 min-w-[320px] w-full flex items-end justify-between gap-2 pt-4 px-2">
+                {chartData.map((d, i) => {
+                  const heightPct = d.totalMovement > 0 ? Math.min(100, Math.max(8, (d.totalMovement / maxMovementVal) * 100)) : 2;
+                  return (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-2 group relative">
+                      <div className="absolute -top-8 bg-slate-800 text-white text-[10px] px-2 py-0.5 rounded shadow border border-slate-700 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                        {d.totalMovement} Units
+                      </div>
+                      <div className="w-full bg-slate-950 rounded-t-lg h-36 flex items-end overflow-hidden">
+                        <div
+                          style={{ height: `${heightPct}%` }}
+                          className={cn(
+                            'w-full rounded-t transition-all duration-500 group-hover:brightness-125',
+                            d.totalMovement > 0 ? 'bg-gradient-to-t from-blue-600 to-cyan-400' : 'bg-slate-800/40'
+                          )}
+                        />
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-mono truncate max-w-full">{d.date}</span>
                     </div>
-                    <div className="w-full bg-slate-950 rounded-t-lg h-36 flex items-end overflow-hidden">
-                      <div
-                        style={{ height: `${heightPct}%` }}
-                        className={cn(
-                          'w-full rounded-t transition-all duration-500 group-hover:brightness-125',
-                          d.totalMovement > 0 ? 'bg-gradient-to-t from-blue-600 to-cyan-400' : 'bg-slate-800/40'
-                        )}
-                      />
-                    </div>
-                    <span className="text-[10px] text-slate-400 font-mono truncate max-w-full">{d.date}</span>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
@@ -454,34 +456,36 @@ export const Dashboard: React.FC = () => {
           {chartData.length === 0 ? (
             <EmptyState title="No Stock Movements" description="No inventory transactions recorded for the selected filter." />
           ) : (
-            <div className="h-48 w-full flex items-end justify-between gap-2 pt-4 px-2">
-              {chartData.map((d, i) => {
-                const inPct = d.incoming > 0 ? Math.min(100, Math.max(6, (d.incoming / maxFlowVal) * 100)) : 2;
-                const outPct = d.outgoing > 0 ? Math.min(100, Math.max(6, (d.outgoing / maxFlowVal) * 100)) : 2;
-                return (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-2">
-                    <div className="w-full bg-slate-950 rounded-t-lg h-36 flex items-end justify-center gap-1 px-1">
-                      <div
-                        style={{ height: `${inPct}%` }}
-                        className={cn(
-                          'w-1/2 rounded-t transition-all duration-500 hover:brightness-110',
-                          d.incoming > 0 ? 'bg-emerald-500' : 'bg-slate-800/30'
-                        )}
-                        title={`Incoming: ${d.incoming}`}
-                      />
-                      <div
-                        style={{ height: `${outPct}%` }}
-                        className={cn(
-                          'w-1/2 rounded-t transition-all duration-500 hover:brightness-110',
-                          d.outgoing > 0 ? 'bg-purple-500' : 'bg-slate-800/30'
-                        )}
-                        title={`Outgoing: ${d.outgoing}`}
-                      />
+            <div className="overflow-x-auto pb-2">
+              <div className="h-48 min-w-[320px] w-full flex items-end justify-between gap-2 pt-4 px-2">
+                {chartData.map((d, i) => {
+                  const inPct = d.incoming > 0 ? Math.min(100, Math.max(6, (d.incoming / maxFlowVal) * 100)) : 2;
+                  const outPct = d.outgoing > 0 ? Math.min(100, Math.max(6, (d.outgoing / maxFlowVal) * 100)) : 2;
+                  return (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                      <div className="w-full bg-slate-950 rounded-t-lg h-36 flex items-end justify-center gap-1 px-1">
+                        <div
+                          style={{ height: `${inPct}%` }}
+                          className={cn(
+                            'w-1/2 rounded-t transition-all duration-500 hover:brightness-110',
+                            d.incoming > 0 ? 'bg-emerald-500' : 'bg-slate-800/30'
+                          )}
+                          title={`Incoming: ${d.incoming}`}
+                        />
+                        <div
+                          style={{ height: `${outPct}%` }}
+                          className={cn(
+                            'w-1/2 rounded-t transition-all duration-500 hover:brightness-110',
+                            d.outgoing > 0 ? 'bg-purple-500' : 'bg-slate-800/30'
+                          )}
+                          title={`Outgoing: ${d.outgoing}`}
+                        />
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-mono truncate max-w-full">{d.date}</span>
                     </div>
-                    <span className="text-[10px] text-slate-400 font-mono truncate max-w-full">{d.date}</span>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

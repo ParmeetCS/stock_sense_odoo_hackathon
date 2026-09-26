@@ -316,15 +316,16 @@ export const ReceiptList: React.FC = () => {
 
       {/* KANBAN VIEW */}
       {viewMode === 'kanban' ? (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          {kanbanColumns.map((col) => {
-            const colReceipts = receipts.filter((r) => r.status === col.id);
-            const Icon = col.icon;
-            return (
-              <div
-                key={col.id}
-                className="bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col min-h-[500px]"
-              >
+        <div className="w-full overflow-x-auto pb-4">
+          <div className="flex md:grid md:grid-cols-5 gap-4 min-w-[1000px] md:min-w-0">
+            {kanbanColumns.map((col) => {
+              const colReceipts = receipts.filter((r) => r.status === col.id);
+              const Icon = col.icon;
+              return (
+                <div
+                  key={col.id}
+                  className="bg-slate-900/60 border border-slate-800 rounded-xl p-3 flex flex-col min-h-[500px] w-72 md:w-auto shrink-0"
+                >
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
                   <div className="flex items-center gap-2">
                     <Icon className="w-4 h-4 text-slate-400" />
@@ -392,6 +393,7 @@ export const ReceiptList: React.FC = () => {
               </div>
             );
           })}
+          </div>
         </div>
       ) : (
         /* LIST VIEW TABLE */
