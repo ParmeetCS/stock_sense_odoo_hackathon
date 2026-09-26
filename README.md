@@ -1,3 +1,13 @@
+# Odoo x LPU Jalandhar Hackathon 2026
+
+### 👥 Team Members
+- **Parmeet Singh** — [`@ParmeetCS`](https://github.com/ParmeetCS)
+- **Manish Manghra** — [`@Manish0101-spec`](https://github.com/Manish0101-spec)
+- **Harpreet Singh Cheema** — [`@Harpreet-x17`](https://github.com/Harpreet-x17)
+- **Lakhvir Singh** — [`@lakhvir2507`](https://github.com/lakhvir2507)
+
+---
+
 # StockSense WMS — Enterprise Inventory & Warehouse Management System
 
 StockSense is a high-performance, real-time Enterprise Warehouse Management System (WMS) built with React 19, TypeScript, Vite, Tailwind CSS v4, and Supabase. It implements an atomic, double-entry inventory ledger engine designed according to standard logistics and supply chain principles.
