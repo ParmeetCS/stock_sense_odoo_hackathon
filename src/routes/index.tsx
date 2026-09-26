@@ -8,6 +8,7 @@ import { ForgotPassword } from '../pages/auth/ForgotPassword';
 import { OtpVerification } from '../pages/auth/OtpVerification';
 import { ResetPassword } from '../pages/auth/ResetPassword';
 import { ProfilePage } from '../pages/ProfilePage';
+import { Dashboard } from '../pages/Dashboard';
 import { PlaceholderModule } from '../components/PlaceholderModule';
 
 const router = createBrowserRouter([
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
               { index: true, element: <Navigate to="/dashboard" replace /> },
               {
                 path: 'dashboard',
-                element: <PlaceholderModule title="Enterprise Operations Dashboard" moduleName="Dashboard" category="Main" />,
+                element: <Dashboard />,
               },
               /* Products */
               {
